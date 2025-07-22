@@ -15,12 +15,17 @@
  */
 #include QMK_KEYBOARD_H
 #include "gpio.h"
+#include "raw_hid.h"
 
-// turn off led
-void keyboard_pre_init_user(void) {
-    gpio_set_pin_output(24);
-    gpio_write_pin_high(24);
-}
+typedef struct __attribute__((packed)) {
+  uint8_t report_id;
+  uint8_t layer;
+  uint8_t command;
+  uint8_t argument;
+  uint8_t reserved[29];
+} data_config_t;
+
+
 
 enum layers {
     _COLEMAK_DH = 0,
@@ -414,3 +419,52 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return false;
 }
 #endif
+
+static volatile data_config_t data_config = {0};
+static volatile bool data_dirty = 0;
+
+enum common_layers {
+    G_DEFAULT = 0,
+    G_ADJUST = 1,
+    G_GAMING = 2,
+};
+
+uint8_t layer_to_data(enum layers layer) {
+    switch (layer) {
+        case _ADJUST:
+            return G_ADJUST;
+        case _GAMING:
+        case _GAMING_QWERTY:
+        case _GAMING_SCII:
+        case _GAMING_NAVNUM:
+            return G_GAMING;
+        default:
+            return G_DEFAULT;
+    }
+}
+
+// turn off led
+void keyboard_pre_init_user(void) {
+    gpio_set_pin_output(24);
+    gpio_write_pin_high(24);
+}
+
+void raw_hid_receive(uint8_t *data, uint8_t length) {
+    // memcpy(&data_config, data, length);
+    data_config.layer = layer_to_data(get_highest_layer(layer_state|default_layer_state));
+    raw_hid_send((unsigned char*)&data_config, 32);
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    data_config.layer = layer_to_data(get_highest_layer(state|default_layer_state));
+    // data_dirty = 1;
+    raw_hid_send((unsigned char*)&data_config, 32);
+    return state;
+}
+
+void matrix_scan_user(void) {
+    if (data_dirty) {
+        data_dirty = !data_dirty;
+        raw_hid_send((unsigned char*)&data_config, 32);
+    }
+}

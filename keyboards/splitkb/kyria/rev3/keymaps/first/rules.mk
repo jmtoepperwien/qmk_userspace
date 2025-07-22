@@ -2,7 +2,9 @@ USER_NAME := crunchyflakes
 
 OLED_ENABLE = yes
 CONVERT_TO = liatris
+BOOTLOADER = rp2040
 
 CAPS_WORD_ENABLE = yes
 UNICODE_COMMON = yes
 UNICODEMAP_ENABLE = yes
+RAW_ENABLE = yes
