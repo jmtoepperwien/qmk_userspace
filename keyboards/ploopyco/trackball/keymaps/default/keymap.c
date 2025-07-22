@@ -16,14 +16,63 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "raw_hid.h"
+
+
+typedef struct __attribute__((packed)) {
+  uint8_t report_id;
+  uint8_t layer;
+  uint8_t command;
+  uint8_t argument;
+  uint8_t reserved[29];
+} data_config_t;
+
 
 enum layers {
     _DEFAULT = 0,
+    _ADJUST,
+    _GAMING,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT( /* Base */
         QK_MOUSE_BUTTON_1, QK_MOUSE_BUTTON_3, QK_MOUSE_BUTTON_2,
-          QK_MOUSE_BUTTON_4, DRAG_SCROLL
+          DRAG_SCROLL, QK_MOUSE_BUTTON_5
     ),
+    [_ADJUST] = LAYOUT(
+        _______, _______, _______,
+          _______, QK_BOOT
+    ),
+    [_GAMING] = LAYOUT(
+        KC_SPACE, _______, _______,
+          QK_MOUSE_BUTTON_4, _______
+    ),
+
 };
+
+
+enum common_layers {
+    G_DEFAULT = 0,
+    G_ADJUST = 1,
+    G_GAMING = 2,
+};
+
+void set_layer_using_common(enum common_layers layer) {
+    layer_move(_DEFAULT);
+    switch (layer) {
+        case G_ADJUST:
+            layer_on(_ADJUST);
+            return;
+        case G_GAMING:
+            layer_on(_GAMING);
+            return;
+        default:
+            return;
+    }
+}
+
+void raw_hid_receive(uint8_t *data, uint8_t length) {
+    data_config_t *data_config = (data_config_t*)data;
+    set_layer_using_common(data_config->layer);
+    raw_hid_send(data, length);
+}
