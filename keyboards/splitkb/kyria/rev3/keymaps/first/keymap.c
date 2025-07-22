@@ -33,6 +33,7 @@ enum layers {
     _DVORAK,
     _GAMING,
     _GAMING_QWERTY,
+    _GAMING_SCII,
     _GAMING_NAVNUM,
     _NAV,
     _SYM,
@@ -46,15 +47,16 @@ enum layers {
 #define COLEMAK         DF(_COLEMAK_DH)
 #define QWERTY          DF(_QWERTY)
 #define DVORAK          DF(_DVORAK)
+
 #define GAMING          DF(_GAMING)
 #define GAMING_QWERTY   DF(_GAMING_QWERTY)
-
+#define GAMING_SCII     DF(_GAMING_SCII)
+#define GAMING_NAVNUM MO(_GAMING_NAVNUM)
 #define SYM      MO(_SYM)
 #define NUM      MO(_NUM)
 #define NAV      MO(_NAV)
 #define FUNCTION MO(_FUNCTION)
 #define ADJUST   MO(_ADJUST)
-#define GAMING_NAVNUM MO(_GAMING_NAVNUM)
 
 #define CTL_ESC  MT(MOD_LCTL, KC_ESC)
 #define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
@@ -106,6 +108,13 @@ const uint32_t PROGMEM unicode_map[] = {
 #define QH_K RGUI_T(KC_K)
 #define QH_L LALT_T(KC_L)
 #define QH_SCLN RCTL_T(KC_SCLN)
+
+// Gaming specific
+
+const uint16_t PROGMEM upper_left_combo[] = {KC_TAB, KC_Y, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(upper_left_combo, KC_J),
+};
 
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
@@ -178,21 +187,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_GAMING] = LAYOUT(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
      KC_LSFT , KC_A ,  KC_R   ,  KC_S  ,   KC_T ,   KC_G ,                                        KC_M,   KC_N ,  KC_E ,   KC_I ,  KC_O , CTL_QUOT,
-     KC_LCTL , KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , ADJUST, FUNCTION,     FUNCTION, COLEMAK, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                 KC_LALT, LT(GAMING_NAVNUM, KC_TAB), KC_SPC, KC_ESC, QK_CAPS_WORD_TOGGLE, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
+     KC_LCTL , KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , ADJUST, FUNCTION,     FUNCTION, ADJUST, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
+                                 KC_LALT, LT(GAMING_NAVNUM, KC_TAB), MS_BTN1, KC_SPC, KC_ESC, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
     ),
 
     [_GAMING_QWERTY] = LAYOUT(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
-     KC_LSFT, KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H,   KC_J ,  KC_K ,   KC_L ,KC_SCLN,CTL_QUOT,
-     KC_LCTL , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , ADJUST, FUNCTION,     FUNCTION, COLEMAK, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
+     KC_LSFT, KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H,   KC_J ,  KC_K ,   KC_L ,KC_SCLN, KC_QUOT,
+     KC_LCTL , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , ADJUST, FUNCTION,     FUNCTION, ADJUST, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
                                  KC_LALT, LT(GAMING_NAVNUM, KC_TAB), KC_SPC, KC_ESC, QK_CAPS_WORD_TOGGLE, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
     ),
 
+    [_GAMING_SCII] = LAYOUT(
+     KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
+     KC_Y, KC_A ,  KC_R   ,  KC_S  ,   KC_T ,   KC_G ,                                        KC_M,   KC_N ,  KC_E ,   KC_I ,  KC_O , CTL_QUOT,
+     KC_O, KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , KC_LSFT, KC_LSFT,     FUNCTION, ADJUST, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
+                                 LT(GAMING_NAVNUM, KC_ESC), MS_BTN3, KC_LSFT, KC_LCTL, KC_LALT, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
+    ),
+
     [_GAMING_NAVNUM] = LAYOUT(
-     _______, KC_1,  KC_2,  KC_3,   KC_4,   KC_5,                                        _______,   _______,  _______,   _______,_______, _______,
+     KC_DOT, KC_1,  KC_2,  KC_3,   KC_4,   KC_5,                                        _______,   _______,  _______,   _______,_______, _______,
      _______, _______,  _______,  _______,   _______,   _______,                                        KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, _______, _______,
-     _______, _______,  _______,  _______,   _______,   _______, ADJUST, FUNCTION,     FUNCTION, COLEMAK, _______,   _______,_______, _______,_______, _______,
+     _______, _______,  _______,  _______,   _______,   _______, ADJUST, FUNCTION,     FUNCTION, ADJUST, _______,   _______,_______, _______,_______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 
     ),
@@ -285,7 +301,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ADJUST] = LAYOUT(
       _______, _______, _______, COLEMAK , GAMING, _______,                                    _______, _______, _______, _______,  _______, QK_BOOT,
       _______, _______, _______, QWERTY  , GAMING_QWERTY, _______,                                    RM_TOGG, RM_SATU, RM_HUEU, RM_VALU,  RM_NEXT, _______,
-      _______, _______, _______, DVORAK  , _______, _______,_______, _______, _______, _______, _______, RM_SATD, RM_HUED, RM_VALD, RM_PREV,  _______,
+      _______, _______, _______, DVORAK  , GAMING_SCII, _______,_______, _______, _______, _______, _______, RM_SATD, RM_HUED, RM_VALD, RM_PREV,  _______,
                                  _______, _______, _______,_______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -366,6 +382,9 @@ bool oled_task_user(void) {
                 break;
             case _GAMING_QWERTY:
                 oled_write_P(PSTR("Gaming-QWERTY\n"), false);
+                break;
+            case _GAMING_SCII:
+                oled_write_P(PSTR("Gaming-SCII\n"), false);
                 break;
             case _GAMING_NAVNUM:
                 oled_write_P(PSTR("Gaming-NAVNUM\n"), false);
