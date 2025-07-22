@@ -137,9 +137,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_COLEMAK_DH] = LAYOUT(
-     KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
-     CTL_ESC , CH_A ,  CH_R   ,  CH_S  ,   CH_T ,   KC_G ,                                        KC_M,   CH_N ,  CH_E ,   CH_I ,  CH_O , CTL_QUOT,
-     KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , ADJUST, FUNCTION,     FUNCTION, GAMING, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
+     _______, KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, _______,
+     _______, CH_A ,  CH_R   ,  CH_S  ,   CH_T ,   KC_G ,                                        KC_M,   CH_N ,  CH_E ,   CH_I ,  CH_O , _______,
+     _______, KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , ADJUST, FUNCTION,     FUNCTION, ADJUST, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, _______,
                                  KC_APP, LT(NAV, KC_TAB), LT(SYM, KC_SPC), LT(NUM, KC_ESC), QK_CAPS_WORD_TOGGLE, KC_CAPS, LT(NUM, KC_ENT),LT(SYM, KC_BSPC), KC_DEL, _______
     ),
 
@@ -249,9 +249,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_SYM] = LAYOUT(
-      _______ ,   KC_TILDE ,   KC_LABK ,   KC_RABK ,   KC_HASH , _______,                                       KC_AMPERSAND ,   KC_COLON ,   KC_LBRC ,   KC_RBRC ,   KC_BACKSLASH , _______,
+      _______ ,   KC_TILDE ,   KC_LABK ,   KC_RABK ,   KC_QUOT, _______,                                       KC_AMPERSAND ,   KC_DQUO,   KC_LBRC ,   KC_RBRC ,   KC_BACKSLASH , _______,
      _______ , KC_EXLM,  KC_MINUS, KC_PLUS,  KC_KP_EQUAL, KC_GRV,                                     KC_DOLLAR, KC_UNDS, KC_LPRN, KC_RPRN, KC_PERC, _______,
-     _______ ,KC_CIRC , KC_SLASH, KC_ASTR, KC_AT, KC_0, _______, _______, _______, _______, KC_1, KC_PIPE, KC_LCBR, KC_RCBR, _______, _______,
+     _______ ,KC_CIRC , KC_HASH, KC_ASTR, KC_AT, KC_0, _______, _______, _______, _______, KC_1, KC_PIPE, KC_LCBR, KC_RCBR, _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -486,4 +486,22 @@ void matrix_scan_user(void) {
         data_dirty = !data_dirty;
         raw_hid_send((unsigned char*)&data_config, 32);
     }
+}
+
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                      uint16_t other_keycode, keyrecord_t* other_record) {
+    // Exceptionally allow some one-handed chords for hotkeys.
+    switch (tap_hold_keycode) {
+        case CH_A:
+            if (other_keycode == KC_C || other_keycode == KC_V) {
+                return true;
+            }
+            break;
+    }
+    // Also allow during gaming
+    if (layer_to_data(get_highest_layer(layer_state|default_layer_state)) == G_GAMING) {
+        return true;
+    }
+    // Otherwise defer to the opposite hands rule.
+    return get_chordal_hold_default(tap_hold_record, other_record);
 }
