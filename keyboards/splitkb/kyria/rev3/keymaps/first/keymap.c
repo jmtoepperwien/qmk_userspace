@@ -202,12 +202,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
      KC_Y, KC_A ,  KC_R   ,  KC_S  ,   KC_T ,   KC_G ,                                        KC_M,   KC_N ,  KC_E ,   KC_I ,  KC_O , CTL_QUOT,
      KC_O, KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , KC_LSFT, KC_LSFT,     FUNCTION, ADJUST, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                 LT(GAMING_NAVNUM, KC_ESC), MS_BTN3, KC_LSFT, KC_LCTL, KC_LALT, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
+                                 LT(GAMING_NAVNUM, KC_COMM), KC_LSFT, KC_LALT, KC_LCTL, KC_LALT, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
     ),
 
     [_GAMING_NAVNUM] = LAYOUT(
-     KC_DOT, KC_1,  KC_2,  KC_3,   KC_4,   KC_5,                                        _______,   _______,  _______,   _______,_______, _______,
-     _______, _______,  _______,  _______,   _______,   _______,                                        KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, _______, _______,
+     KC_DOT, KC_1,  KC_2,  KC_3,   KC_4,   KC_5,                                        _______,   _______,  _______,   _______,_______, KC_ESC,
+     _______, _______,  _______,  _______,   _______,   _______,                                        KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, _______, KC_PAUSE,
      _______, _______,  _______,  _______,   _______,   _______, ADJUST, FUNCTION,     FUNCTION, ADJUST, _______,   _______,_______, _______,_______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 
@@ -446,6 +446,7 @@ enum common_layers {
     G_DEFAULT = 0,
     G_ADJUST = 1,
     G_GAMING = 2,
+    G_GAMING_SCII = 3,
 };
 
 uint8_t layer_to_data(enum layers layer) {
@@ -454,9 +455,10 @@ uint8_t layer_to_data(enum layers layer) {
             return G_ADJUST;
         case _GAMING:
         case _GAMING_QWERTY:
-        case _GAMING_SCII:
         case _GAMING_NAVNUM:
             return G_GAMING;
+        case _GAMING_SCII:
+            return G_GAMING_SCII;
         default:
             return G_DEFAULT;
     }
@@ -499,7 +501,7 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
             break;
     }
     // Also allow during gaming
-    if (layer_to_data(get_highest_layer(layer_state|default_layer_state)) == G_GAMING) {
+    if (layer_to_data(get_highest_layer(layer_state|default_layer_state)) == G_GAMING || layer_to_data(get_highest_layer(layer_state|default_layer_state)) == G_GAMING_SCII) {
         return true;
     }
     // Otherwise defer to the opposite hands rule.

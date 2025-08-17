@@ -32,6 +32,7 @@ enum layers {
     _DEFAULT = 0,
     _ADJUST,
     _GAMING,
+    _GAMING_SCII,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -47,6 +48,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_SPACE, _______, _______,
           QK_MOUSE_BUTTON_4, _______
     ),
+    [_GAMING_SCII] = LAYOUT(
+        _______, _______, _______,
+          QK_MOUSE_BUTTON_5, QK_MOUSE_BUTTON_4
+    ),
 
 };
 
@@ -55,6 +60,7 @@ enum common_layers {
     G_DEFAULT = 0,
     G_ADJUST = 1,
     G_GAMING = 2,
+    G_GAMING_SCII = 3,
 };
 
 void set_layer_using_common(enum common_layers layer) {
@@ -65,6 +71,9 @@ void set_layer_using_common(enum common_layers layer) {
             return;
         case G_GAMING:
             layer_on(_GAMING);
+            return;
+        case G_GAMING_SCII:
+            layer_on(_GAMING_SCII);
             return;
         default:
             return;
