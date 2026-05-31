@@ -41,6 +41,7 @@ enum layers {
     _NUM,
     _FUNCTION,
     _ADJUST,
+    _UMLAUT,
 };
 
 
@@ -65,23 +66,12 @@ enum layers {
 #define CTL_MINS MT(MOD_RCTL, KC_MINUS)
 #define ALT_ENT  MT(MOD_LALT, KC_ENT)
 
-// Umlaute
-enum unicode_names {
-    AE_LOWER,
-    AE_UPPER,
-    OE_LOWER,
-    OE_UPPER,
-    UE_LOWER,
-    UE_UPPER,
-};
-
-const uint32_t PROGMEM unicode_map[] = {
-    [AE_LOWER] = 0x00E4,
-    [AE_UPPER] = 0x00C4,
-    [OE_LOWER] = 0x00F6,
-    [OE_UPPER] = 0x00D6,
-    [UE_LOWER] = 0x00FC,
-    [UE_UPPER] = 0x00DC,
+// Umlaut keycodes — sent via XKB compose sequences (KC_APP = compose key)
+enum custom_keycodes {
+    CK_AE = SAFE_RANGE,  // ä / Ä
+    CK_OE,               // ö / Ö
+    CK_UE,               // ü / Ü
+    CK_SS,               // ß
 };
 
 // Home Row Mods for Colemak_DH
@@ -142,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______, KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, _______,
      _______, CH_A ,  CH_R   ,  CH_S  ,   CH_T ,   KC_G ,                                        KC_M,   CH_N ,  CH_E ,   CH_I ,  CH_O , _______,
      _______, KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , ADJUST, FUNCTION,     FUNCTION, ADJUST, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, _______,
-                                 KC_APP, LT(NAV, KC_TAB), LT(SYM, KC_SPC), LT(NUM, KC_ESC), QK_CAPS_WORD_TOGGLE, KC_CAPS, LT(NUM, KC_ENT),LT(SYM, KC_BSPC), KC_DEL, _______
+                                 KC_APP, LT(NAV, KC_TAB), LT(SYM, KC_SPC), LT(NUM, KC_ESC), LT(_UMLAUT, QK_CAPS_WORD_TOGGLE), LT(_UMLAUT, KC_CAPS), LT(NUM, KC_ENT),LT(SYM, KC_BSPC), KC_DEL, _______
     ),
 
 /*
@@ -189,8 +179,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_GAMING] = LAYOUT(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
      KC_LSFT , KC_A ,  KC_R   ,  KC_S  ,   KC_T ,   KC_G ,                                        KC_M,   KC_N ,  KC_E ,   KC_I ,  KC_O , CTL_QUOT,
-     KC_LCTL , KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , GAMING_NAVNUM, FUNCTION,     FUNCTION, ADJUST, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                 KC_TAB, KC_LALT, KC_SPC, KC_ESC, KC_LCTL, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
+     KC_LCTL , KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , GAMING_NAVNUM, KC_ESC,     FUNCTION, ADJUST, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
+                                 KC_TAB, KC_LALT, KC_SPC, KC_1, KC_2, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
     ),
 
     [_GAMING_QWERTY] = LAYOUT(
@@ -313,6 +303,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______, _______, _______,_______, _______, _______, _______, _______, _______, _______
     ),
 
+/*
+ * Umlaut Layer: ä ö ü ß on Colemak-DH positions
+ * Hold Shift → Ä Ö Ü  (Shift state checked in process_record_user)
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |      |      |      |      |      |                              |      |      |  Ü   |      |      |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |        |      |  Ä   |      |      |      |                              |      |      |  ß   |      |  Ö   |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_UMLAUT] = LAYOUT(
+  _______, _______, _______, _______, _______, _______,                              _______, _______, CK_UE,   _______, _______, _______,
+  _______, CK_AE,   _______, CK_SS,   _______, _______,                              _______, _______, _______, _______, CK_OE,   _______,
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    ),
+
 
 // /*
 //  * Layer template
@@ -396,6 +408,9 @@ bool oled_task_user(void) {
                 break;
             case _GAMING_NAVNUM:
                 oled_write_P(PSTR("Gaming-NAVNUM\n"), false);
+                break;
+            case _UMLAUT:
+                oled_write_P(PSTR("Umlaut\n"), false);
                 break;
             default:
                 oled_write_P(PSTR("Undefined\n"), false);
@@ -496,6 +511,38 @@ void matrix_scan_user(void) {
         data_dirty = !data_dirty;
         raw_hid_send((unsigned char*)&data_config, 32);
     }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!record->event.pressed) return true;
+    uint8_t mods = get_mods();
+    bool shifted = mods & MOD_MASK_SHIFT;
+    switch (keycode) {
+        case CK_AE:
+            del_mods(MOD_MASK_SHIFT);
+            if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_A))); }
+            else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_A)); }
+            set_mods(mods);
+            return false;
+        case CK_OE:
+            del_mods(MOD_MASK_SHIFT);
+            if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_O))); }
+            else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_O)); }
+            set_mods(mods);
+            return false;
+        case CK_UE:
+            del_mods(MOD_MASK_SHIFT);
+            if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_U))); }
+            else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_U)); }
+            set_mods(mods);
+            return false;
+        case CK_SS:
+            del_mods(MOD_MASK_SHIFT);
+            SEND_STRING(SS_TAP(X_APP) SS_TAP(X_S) SS_TAP(X_S));
+            set_mods(mods);
+            return false;
+    }
+    return true;
 }
 
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
