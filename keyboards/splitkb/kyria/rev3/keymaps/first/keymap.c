@@ -513,7 +513,22 @@ void matrix_scan_user(void) {
     }
 }
 
+// QMK has no refcounting for MO/LT layers: releasing one of two layer keys
+// kills the layer even if the other is still held. Count holds and re-assert.
+static uint8_t layer_holds[16];
+
+static uint8_t layer_of_keycode(uint16_t keycode) {
+    if (keycode >= QK_MOMENTARY && keycode <= QK_MOMENTARY_MAX) return QK_MOMENTARY_GET_LAYER(keycode);
+    if (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX) return QK_LAYER_TAP_GET_LAYER(keycode);
+    return 255;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    uint8_t layer = layer_of_keycode(keycode);
+    if (layer != 255 && record->tap.count == 0) {  // taps don't change holds
+        if (record->event.pressed) { if (layer_holds[layer] < 255) layer_holds[layer]++; }
+        else if (layer_holds[layer]) layer_holds[layer]--;
+    }
     if (!record->event.pressed) return true;
     uint8_t mods = get_mods();
     bool shifted = mods & MOD_MASK_SHIFT;
@@ -543,6 +558,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
     }
     return true;
+}
+
+// Runs after QMK's built-in handling: undo the layer_off if another key still
+// holds this layer.
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    uint8_t layer = layer_of_keycode(keycode);
+    if (layer != 255 && !record->event.pressed && record->tap.count == 0 && layer_holds[layer]) {
+        layer_on(layer);
+    }
 }
 
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
