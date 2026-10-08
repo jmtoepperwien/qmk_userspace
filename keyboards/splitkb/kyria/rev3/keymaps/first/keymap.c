@@ -65,6 +65,8 @@ enum layers {
 #define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
 #define CTL_MINS MT(MOD_RCTL, KC_MINUS)
 #define ALT_ENT  MT(MOD_LALT, KC_ENT)
+// LT only takes basic keycodes; tap → Caps Word is handled in process_record_user
+#define UML_CW   LT(_UMLAUT, KC_NO)
 
 // Umlaut keycodes — sent via XKB compose sequences (KC_APP = compose key)
 enum custom_keycodes {
@@ -132,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______, KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, _______,
      _______, CH_A ,  CH_R   ,  CH_S  ,   CH_T ,   KC_G ,                                        KC_M,   CH_N ,  CH_E ,   CH_I ,  CH_O , _______,
      _______, KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , ADJUST, FUNCTION,     FUNCTION, ADJUST, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, _______,
-                                 KC_APP, LT(NAV, KC_TAB), LT(SYM, KC_SPC), LT(NUM, KC_ESC), LT(_UMLAUT, QK_CAPS_WORD_TOGGLE), LT(_UMLAUT, KC_CAPS), LT(NUM, KC_ENT),LT(SYM, KC_BSPC), KC_DEL, _______
+                                 KC_APP, LT(NAV, KC_TAB), LT(SYM, KC_SPC), LT(NUM, KC_ESC), UML_CW, LT(_UMLAUT, KC_CAPS), LT(NUM, KC_ENT),LT(SYM, KC_BSPC), KC_DEL, _______
     ),
 
 /*
@@ -528,6 +530,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (layer != 255 && record->tap.count == 0) {  // taps don't change holds
         if (record->event.pressed) { if (layer_holds[layer] < 255) layer_holds[layer]++; }
         else if (layer_holds[layer]) layer_holds[layer]--;
+    }
+    if (keycode == UML_CW && record->tap.count) {
+        if (record->event.pressed) caps_word_toggle();
+        return false;
     }
     if (!record->event.pressed) return true;
     uint8_t mods = get_mods();
