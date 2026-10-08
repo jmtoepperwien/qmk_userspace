@@ -42,6 +42,8 @@
 #define SPECULATIVE_HOLD
 #define FORCE_NKRO
 #define COMBO_SHOULD_TRIGGER
+// Auto-off after 5 s idle so Caps Word doesn't stay stuck on
+#define CAPS_WORD_IDLE_TIMEOUT 5000
 
 #define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX
 
