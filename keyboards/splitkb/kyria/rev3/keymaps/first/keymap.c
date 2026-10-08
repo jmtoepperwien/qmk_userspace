@@ -117,24 +117,24 @@ combo_t key_combos[] = {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
- * Base Layer: Colemak DH
+ * Base Layer: Colemak DH (home row mods; outer columns intentionally empty)
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  Tab   |   Q  |   W  |   F  |   P  |   B  |                              |   J  |   L  |   U  |   Y  | ;  : |  Bksp  |
+ * |        |   Q  |   W  |   F  |   P  |   B  |                              |   J  |   L  |   U  |   Y  | ;  : |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/Esc|   A  |   R  |   S  |   T  |   G  |                              |   M  |   N  |   E  |   I  |   O  |Ctrl/' "|
+ * |        |Ctrl/A| Alt/R| GUI/S| Sft/T|   G  |                              |   M  | Sft/N| GUI/E| Alt/I|Ctrl/O|        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   D  |   V  | [ {  |CapsLk|  |F-keys|  ] } |   K  |   H  | ,  < | . >  | /  ? | RShift |
+ * |        |   Z  |   X  |   C  |   D  |   V  |Adjust|F-keys|  |F-keys|Adjust|   K  |   H  | ,  < | . >  | /  ? |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | Sym  | Space| AltGr| RGUI | Menu |
- *                        |      |      | Enter|      |      |  |      |      |      |      |      |
+ *                        | Menu | Nav/ | Sym/ | Num/ | Uml/ |  | Uml/ | Num/ | Sym/ |  Del |      |
+ *                        |      |  Tab | Space|  Esc | CWord|  | Caps | Enter| Bksp |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_COLEMAK_DH] = LAYOUT(
      _______, KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, _______,
      _______, CH_A ,  CH_R   ,  CH_S  ,   CH_T ,   KC_G ,                                        KC_M,   CH_N ,  CH_E ,   CH_I ,  CH_O , _______,
      _______, KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , ADJUST, FUNCTION,     FUNCTION, ADJUST, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, _______,
-                                 KC_APP, LT(NAV, KC_TAB), LT(SYM, KC_SPC), LT(NUM, KC_ESC), UML_CW, LT(_UMLAUT, KC_CAPS), LT(NUM, KC_ENT),LT(SYM, KC_BSPC), KC_DEL, _______
+                                 KC_APP, LT(_NAV, KC_TAB), LT(_SYM, KC_SPC), LT(_NUM, KC_ESC), UML_CW, LT(_UMLAUT, KC_CAPS), LT(_NUM, KC_ENT),LT(_SYM, KC_BSPC), KC_DEL, _______
     ),
 
 /*
@@ -143,19 +143,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |  Tab   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  Bksp  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/Esc|   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |Ctrl/' "|
+ * |Ctrl/Esc|Ctrl/A| Alt/S| GUI/D| Sft/F|   G  |                              |   H  | Sft/J| GUI/K| Alt/L|Ctrl/;|Ctrl/' "|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  | [ {  |CapsLk|  |F-keys|  ] } |   N  |   M  | ,  < | . >  | /  ? | RShift |
+ * | LShift |   Z  |   X  |   C  |   V  |   B  |Adjust|F-keys|  |F-keys|Gaming|   N  |   M  | ,  < | . >  | /  ? | RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | sym  | Space| AltGr| RGUI | Menu |
- *                        |      |      | Enter|      |      |  |      |      |      |      |      |
+ *                        | Menu | Nav/ | Sym/ | Num/ |CWord |  | Caps | Num/ | Sym/ |  Del |      |
+ *                        |      |  Tab | Space|  Esc |      |  |      | Enter| Bksp |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
      CTL_ESC , QH_A ,  QH_S   ,  QH_D  ,   QH_F ,   KC_G ,                                        KC_H,   QH_J ,  QH_K ,   QH_L ,QH_SCLN,CTL_QUOT,
      KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , ADJUST, FUNCTION,     FUNCTION, GAMING, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                 KC_APP, LT(NAV, KC_TAB), LT(SYM, KC_SPC), LT(NUM, KC_ESC), QK_CAPS_WORD_TOGGLE, KC_CAPS, LT(NUM, KC_ENT),LT(SYM, KC_BSPC), KC_DEL, _______
+                                 KC_APP, LT(_NAV, KC_TAB), LT(_SYM, KC_SPC), LT(_NUM, KC_ESC), QK_CAPS_WORD_TOGGLE, KC_CAPS, LT(_NUM, KC_ENT),LT(_SYM, KC_BSPC), KC_DEL, _______
     ),
 
 /*
@@ -166,17 +166,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |Ctrl/Esc|   A  |   O  |   E  |   U  |   I  |                              |   D  |   H  |   T  |   N  |   S  |Ctrl/- _|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift | ; :  |   Q  |   J  |   K  |   X  | [ {  |CapsLk|  |F-keys|  ] } |   B  |   M  |   W  |   V  |   Z  | RShift |
+ * | LShift | ; :  |   Q  |   J  |   K  |   X  |Adjust|F-keys|  |F-keys|Gaming|   B  |   M  |   W  |   V  |   Z  | RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | Sym  | Space| AltGr| RGUI | Menu |
- *                        |      |      | Enter|      |      |  |      |      |      |      |      |
+ *                        | Menu | Nav/ | Sym/ | Num/ |CWord |  | Caps | Num/ | Sym/ |  Del |      |
+ *                        |      |  Tab | Space|  Esc |      |  |      | Enter| Bksp |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_DVORAK] = LAYOUT(
      KC_TAB  ,KC_QUOTE,KC_COMM,  KC_DOT,   KC_P ,   KC_Y ,                                        KC_F,   KC_G ,  KC_C ,   KC_R ,  KC_L , KC_BSPC,
      CTL_ESC , KC_A ,  KC_O   ,  KC_E  ,   KC_U ,   KC_I ,                                        KC_D,   KC_H ,  KC_T ,   KC_N ,  KC_S , CTL_MINS,
      KC_LSFT ,KC_SCLN, KC_Q   ,  KC_J  ,   KC_K ,   KC_X , ADJUST, FUNCTION,     FUNCTION, GAMING, KC_B,   KC_M ,  KC_W ,   KC_V ,  KC_Z , KC_RSFT,
-                                 KC_APP, LT(NAV, KC_TAB), LT(SYM, KC_SPC), LT(NUM, KC_ESC), QK_CAPS_WORD_TOGGLE, KC_CAPS, LT(NUM, KC_ENT),LT(SYM, KC_BSPC), KC_DEL, _______
+                                 KC_APP, LT(_NAV, KC_TAB), LT(_SYM, KC_SPC), LT(_NUM, KC_ESC), QK_CAPS_WORD_TOGGLE, KC_CAPS, LT(_NUM, KC_ENT),LT(_SYM, KC_BSPC), KC_DEL, _______
     ),
     [_GAMING] = LAYOUT(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
@@ -196,7 +196,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
      KC_Y, KC_A ,  KC_R   ,  KC_S  ,   KC_T ,   KC_G ,                                        KC_M,   KC_N ,  KC_E ,   KC_I ,  KC_O , CTL_QUOT,
      KC_O, KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , KC_LSFT, KC_LSFT,     FUNCTION, ADJUST, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                 LT(GAMING_NAVNUM, KC_COMM), KC_LSFT, KC_LALT, KC_LCTL, KC_LALT, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
+                                 LT(_GAMING_NAVNUM, KC_COMM), KC_LSFT, KC_LALT, KC_LCTL, KC_LALT, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
     ),
 
     [_GAMING_FPS] = LAYOUT(
@@ -217,11 +217,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Nav Layer: Media, navigation
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |      |      |      |      |                              | PgUp | Home |   ↑  | End  | VolUp| Delete |
+ * |        |      |      |      |      |      |                              |      | PgDn | PgUp |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  GUI |  Alt | Ctrl | Shift|      |                              | PgDn |  ←   |   ↓  |   →  | VolDn| Insert |
+ * |        |      |      |      |      |      |                              |   ←  |   ↓  |   ↑  |   →  |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |ScLck |  |      |      | Pause|M Prev|M Play|M Next|VolMut| PrtSc  |
+ * |        |      |      |      |      |      |      |      |  |      |      |      |M Prev|M Play|M Next|VolMut| PrtSc  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -235,14 +235,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 /*
- * Sym Layer: Numbers and symbols
+ * Sym Layer: Symbols
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |    `   |  1   |  2   |  3   |  4   |  5   |                              |   6  |  7   |  8   |  9   |  0   |   =    |
+ * |        |   ~  |   <  |   >  |   '  |      |                              |   &  |   "  |   [  |   ]  |   \  |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |    ~   |  !   |  @   |  #   |  $   |  %   |                              |   ^  |  &   |  *   |  (   |  )   |   +    |
+ * |        |   !  |   -  |   +  |   =  |   `  |                              |   $  |   _  |   (  |   )  |   %  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |    |   |   \  |  :   |  ;   |  -   |  [   |  {   |      |  |      |   }  |   ]  |  _   |  ,   |  .   |  /   |   ?    |
+ * |        |   ^  |   #  |   *  |   @  |   0  |      |      |  |      |      |   1  |   |  |   {  |   }  |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -255,9 +255,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
+/*
+ * Num Layer: Numpad on the right, operators on the left (home row mods)
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |      |      |      |      |      |                              |      |   7  |   8  |   9  |   :  |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |        | Ctrl | Alt/-| GUI/+| Sft/=|      |                              |      | Sft/4| GUI/5| Alt/6|Ctrl/0|        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |        |      |   /  |   *  |      |      |      |      |  |      |      |      |   1  |   2  |   3  |   -  |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
     [_NUM] = LAYOUT(
       _______ ,   _______ ,   _______ ,   _______ ,   _______ ,   _______ ,                                       _______,   KC_7 ,   KC_8 ,   KC_9 , KC_COLON, _______,
-     _______ , MT(MOD_LCTL, _______),  MT(MOD_LALT, KC_MINUS), MT(MOD_LGUI, KC_PLUS),  MT(MOD_LSFT, KC_EQUAL), _______, _______, MT(MOD_RSFT, KC_4) , MT(MOD_RGUI, KC_5) , MT(MOD_RALT, KC_6) , MT(MOD_RCTL, KC_0) , _______,
+     _______ , MT(MOD_LCTL, KC_NO),  MT(MOD_LALT, KC_MINUS), MT(MOD_LGUI, KC_PLUS),  MT(MOD_LSFT, KC_EQUAL), _______, _______, MT(MOD_RSFT, KC_4) , MT(MOD_RGUI, KC_5) , MT(MOD_RALT, KC_6) , MT(MOD_RCTL, KC_0) , _______,
      _______ , _______, KC_SLASH, KC_ASTERISK, _______, _______, _______, _______, _______, _______, _______,   KC_1,    KC_2 ,   KC_3 , KC_MINUS, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
@@ -267,7 +281,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Function Layer: Function keys
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  F9  | F10  | F11  | F12  |      |                              |      |      |      |      |      |        |
+ * |        |  F9  | F10  | F11  | F12  |      |                              |      |      |      |      |      |  Boot  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        |  F5  |  F6  |  F7  |  F8  |      |                              |      | Shift| Ctrl |  Alt |  GUI |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -288,11 +302,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Adjust Layer: Default layer settings, RGB
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |      |Colemak|      |      |                              |      |      |      |      |      |        |
+ * |        |      |      |ColeDH|Gaming|G-FPS |                              |      |      |      |      |      |  Boot  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |      |      |Qwerty|      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
+ * |        |      |      |Qwerty|G-Qwer|      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |Dvorak|      |      |      |      |  |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
+ * |        |      |      |Dvorak|G-SC2 |      |      |      |  |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -307,16 +321,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /*
  * Umlaut Layer: ä ö ü ß on Colemak-DH positions
- * Hold Shift → Ä Ö Ü  (Shift state checked in process_record_user)
+ * Shift or Caps Word → Ä Ö Ü  (checked in process_record_user)
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |      |      |      |      |      |                              |      |      |  Ü   |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |      |  Ä   |      |      |      |                              |      |      |  ß   |      |  Ö   |        |
+ * |        |  Ä   |      |  ß   |      |      |                              |      |      |      |      |  Ö   |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        |      |      |      |      | held |  | held |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
@@ -465,7 +479,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #endif
 
 static volatile data_config_t data_config = {0};
-static volatile bool data_dirty = 0;
 
 enum common_layers {
     G_DEFAULT = 0,
@@ -496,23 +509,14 @@ void keyboard_pre_init_user(void) {
 }
 
 void raw_hid_receive(uint8_t *data, uint8_t length) {
-    // memcpy(&data_config, data, length);
     data_config.layer = layer_to_data(get_highest_layer(layer_state|default_layer_state));
     raw_hid_send((unsigned char*)&data_config, 32);
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     data_config.layer = layer_to_data(get_highest_layer(state|default_layer_state));
-    // data_dirty = 1;
     raw_hid_send((unsigned char*)&data_config, 32);
     return state;
-}
-
-void matrix_scan_user(void) {
-    if (data_dirty) {
-        data_dirty = !data_dirty;
-        raw_hid_send((unsigned char*)&data_config, 32);
-    }
 }
 
 // QMK has no refcounting for MO/LT layers: releasing one of two layer keys
@@ -523,6 +527,30 @@ static uint8_t layer_of_keycode(uint16_t keycode) {
     if (keycode >= QK_MOMENTARY && keycode <= QK_MOMENTARY_MAX) return QK_MOMENTARY_GET_LAYER(keycode);
     if (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX) return QK_LAYER_TAP_GET_LAYER(keycode);
     return 255;
+}
+
+// Default Caps Word behaviour. (Umlaut keys never reach this — process_record_user
+// returns false first — but keep them listed in case that ever changes.)
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        case KC_A ... KC_Z:
+        case KC_MINS:
+            add_weak_mods(MOD_BIT(KC_LSFT));
+            return true;
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case KC_UNDS:
+        case CK_AE ... CK_SS:
+        // Compose-sequence keys: umlauts are typed as Compose, a, Shift+"
+        // (double quote via SYM layer) — keep Caps Word alive through them,
+        // its weak Shift capitalizes the a.
+        case KC_APP:
+        case KC_DQUO:
+            return true;
+        default:
+            return false;
+    }
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -537,32 +565,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     if (!record->event.pressed) return true;
     uint8_t mods = get_mods();
-    bool shifted = mods & MOD_MASK_SHIFT;
+    bool shifted = (mods & MOD_MASK_SHIFT) || is_caps_word_on();
+    // Umlauts are sent as XKB compose sequences; strip Shift (real and Caps
+    // Word's weak Shift) so the sequence keysyms match, then restore.
+    uint8_t weak_shift = get_weak_mods() & MOD_MASK_SHIFT;
+    del_mods(MOD_MASK_SHIFT);
+    del_weak_mods(MOD_MASK_SHIFT);
     switch (keycode) {
         case CK_AE:
-            del_mods(MOD_MASK_SHIFT);
             if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_A))); }
             else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_A)); }
-            set_mods(mods);
             return false;
         case CK_OE:
-            del_mods(MOD_MASK_SHIFT);
             if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_O))); }
             else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_O)); }
-            set_mods(mods);
             return false;
         case CK_UE:
-            del_mods(MOD_MASK_SHIFT);
             if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_U))); }
             else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_U)); }
-            set_mods(mods);
             return false;
         case CK_SS:
-            del_mods(MOD_MASK_SHIFT);
             SEND_STRING(SS_TAP(X_APP) SS_TAP(X_S) SS_TAP(X_S));
-            set_mods(mods);
             return false;
     }
+    set_mods(mods);
+    add_weak_mods(weak_shift);
     return true;
 }
 
@@ -573,6 +600,12 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (layer != 255 && !record->event.pressed && record->tap.count == 0 && layer_holds[layer]) {
         layer_on(layer);
     }
+}
+
+// Tab+Y → J is only meant for the gaming layers; elsewhere it would just delay Tab and Y.
+bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+    uint8_t base = layer_to_data(get_highest_layer(default_layer_state));
+    return base == G_GAMING || base == G_GAMING_SCII;
 }
 
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
