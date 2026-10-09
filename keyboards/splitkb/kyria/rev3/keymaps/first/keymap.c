@@ -196,10 +196,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  KC_APP, LT(_NAV, KC_TAB), LT(_SYM, KC_SPC), LT(_NUM, KC_ESC), QK_CAPS_WORD_TOGGLE, KC_CAPS, LT(_NUM, KC_ENT),LT(_SYM, KC_BSPC), KC_DEL, _______
     ),
     [_GAMING] = LAYOUT(
-     KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
+     KC_LALT  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
      KC_LSFT , KC_A ,  KC_R   ,  KC_S  ,   KC_T ,   KC_G ,                                        KC_M,   KC_N ,  KC_E ,   KC_I ,  KC_O , CTL_QUOT,
      KC_LCTL , KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , GAMING_NAVNUM, KC_ESC,     FUNCTION, ADJUST, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                 KC_TAB, KC_LALT, KC_SPC, KC_1, KC_2, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
+                                 KC_3, KC_TAB, KC_SPC, KC_1, KC_2, KC_CAPS, KC_ENT, KC_BSPC, KC_DEL, _______
     ),
 
     [_GAMING_QWERTY] = LAYOUT(

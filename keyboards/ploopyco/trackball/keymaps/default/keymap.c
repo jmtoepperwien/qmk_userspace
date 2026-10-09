@@ -37,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT]     = LAYOUT(/* Base */
                         QK_MOUSE_BUTTON_1, QK_MOUSE_BUTTON_3, QK_MOUSE_BUTTON_2, DRAG_SCROLL, QK_MOUSE_BUTTON_5),
     [_ADJUST]      = LAYOUT(_______, _______, _______, _______, QK_BOOT),
-    [_GAMING]      = LAYOUT(KC_SPACE, _______, _______, QK_MOUSE_BUTTON_4, _______),
+    [_GAMING]      = LAYOUT(_______, _______, _______, QK_MOUSE_BUTTON_4, _______),
     [_GAMING_SCII] = LAYOUT(_______, _______, _______, QK_MOUSE_BUTTON_5, QK_MOUSE_BUTTON_4),
 
 };
