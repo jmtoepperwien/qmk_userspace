@@ -36,7 +36,7 @@ Umlauts are sent as XKB compose sequences using the **Menu key as Compose**:
 | `Compose` `Shift+'` `a`      | Ä      |
 | `Compose` `'` `o` / `u`      | ö / ü  |
 | `Compose` `s` `s`            | ß      |
-| `Compose` `=` `e`            | € (on the Sym layer, bottom-left inner key) |
+| `Compose` `=` `e`            | €      |
 
 Host requirements:
 
@@ -100,7 +100,7 @@ mods. Accessed from the Adjust layer. QWERTY is also the base for the
  |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  |        |   !  |   -  |   +  |   =  |   `  |                              |   $  |   _  |   (  |   )  |   %  |        |
  |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- |        |   ^  |   #  |   *  |   @  |  €   |      |      |  |      |      |   1  |   |  |   {  |   }  |      |        |
+ |        |   ^  |   #  |   *  |   @  |   0  |      |      |  |      |      |   1  |   |  |   {  |   }  |      |        |
  `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
 ```
 
@@ -150,13 +150,14 @@ Default layer selection (left) and RGB controls (right):
  ,-------------------------------------------.                              ,-------------------------------------------.
  |        |      |      |      |      |      |                              |      |      |  Ü   |      |      |        |
  |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- |        |  Ä   |      |  ß   |      |      |                              |      |      |      |      |  Ö   |        |
+ |        |  Ä   |      |  ß   |      |      |                              |      |      |  €   |      |  Ö   |        |
  `-----------------------------+------+------+------+------|  |------+------+------+------+------+----------------------'
 ```
 
-Umlauts sit on their Colemak-DH vowel positions. Held Shift — or an active
-Caps Word — capitalizes them (Caps Word stays alive through the compose
-sequence and its weak Shift does the capitalization).
+Umlauts sit on their Colemak-DH vowel positions — plus `€` on the `E` key
+(E = Euro, no shift logic needed). Held Shift — or an active
+Caps Word — capitalizes the umlauts (Caps Word stays alive through the
+compose sequence and its weak Shift does the capitalization).
 
 ## Gaming layers
 

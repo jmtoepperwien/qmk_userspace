@@ -279,7 +279,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_SYM] = LAYOUT(
       _______ ,   KC_TILDE ,   KC_LABK ,   KC_RABK ,   KC_QUOT, _______,                                       KC_AMPERSAND ,   KC_DQUO,   KC_LBRC ,   KC_RBRC ,   KC_BACKSLASH , _______,
      _______ , KC_EXLM,  KC_MINUS, KC_PLUS,  KC_EQUAL, KC_GRV,                                     KC_DOLLAR, KC_UNDS, KC_LPRN, KC_RPRN, KC_PERC, _______,
-     _______ ,KC_CIRC , KC_HASH, KC_ASTR, KC_AT, CK_EURO, _______, _______, _______, _______, KC_1, KC_PIPE, KC_LCBR, KC_RCBR, _______, _______,
+     _______ ,KC_CIRC , KC_HASH, KC_ASTR, KC_AT, KC_0, _______, _______, _______, _______, KC_1, KC_PIPE, KC_LCBR, KC_RCBR, _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -356,7 +356,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |      |      |      |      |      |                              |      |      |  Ü   |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  Ä   |      |  ß   |      |      |                              |      |      |      |      |  Ö   |        |
+ * |        |  Ä   |      |  ß   |      |      |                              |      |      |  €   |      |  Ö   |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -366,7 +366,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_UMLAUT] = LAYOUT(
   _______, _______, _______, _______, _______, _______,                              _______, _______, CK_UE,   _______, _______, _______,
-  _______, CK_AE,   _______, CK_SS,   _______, _______,                              _______, _______, _______, _______, CK_OE,   _______,
+  _______, CK_AE,   _______, CK_SS,   _______, _______,                              _______, _______, CK_EURO, _______, CK_OE,   _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
@@ -573,7 +573,7 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_BSPC:
         case KC_DEL:
         case KC_UNDS:
-        case CK_AE ... CK_SS:
+        case CK_AE ... CK_EURO:
         // Compose-sequence keys: umlauts are typed as Compose, a, Shift+"
         // (double quote via SYM layer) — keep Caps Word alive through them,
         // its weak Shift capitalizes the a.
