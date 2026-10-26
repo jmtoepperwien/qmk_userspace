@@ -655,6 +655,14 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
                 return true;
             }
             break;
+        case LT(_NAV, KC_TAB):
+            // The Nav thumb sits on the left half, and SelWd (Nav layer,
+            // S position) is its only same-hand resident. Without this, a
+            // quick Nav-hold + SelWd roll settles the thumb as a Tab tap
+            // (same-hand rule) and the layer never activates. Tab rolls
+            // into a left-hand key within the tapping term are rare, so
+            // allowing the hold costs nothing.
+            return true;
     }
     // Also allow during gaming
     if (layer_to_data(get_highest_layer(layer_state|default_layer_state)) == G_GAMING || layer_to_data(get_highest_layer(layer_state|default_layer_state)) == G_GAMING_SCII) {

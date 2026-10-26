@@ -193,8 +193,9 @@ gaming, extra buttons on SCII).
 
 - Tap-hold: `TAPPING_TERM 175` (+15 ms on the pinky/ring home-row mods —
   they roll slower), `QUICK_TAP_TERM 100`, `PERMISSIVE_HOLD`,
-  `SPECULATIVE_HOLD`, `CHORDAL_HOLD` (+ the one-handed copy/paste exception;
-  gaming layers exempt entirely).
+  `SPECULATIVE_HOLD`, `CHORDAL_HOLD` (+ exceptions: one-handed copy/paste
+  via the Ctrl/A key, the Nav thumb may be held with same-hand keys so
+  `SelWd` works in a quick roll; gaming layers exempt entirely).
 - **Dual layer-key refcount**: QMK kills a momentary layer when *either* of
   two keys holding it is released; `post_process_record_user` counts active
   layer keys and re-asserts the layer until the last one is released (e.g.
