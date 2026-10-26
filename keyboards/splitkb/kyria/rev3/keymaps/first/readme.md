@@ -117,17 +117,22 @@ mods. Accessed from the Adjust layer. QWERTY is also the base for the
 
 Digits on the right double as modifiers when held — e.g. hold `4` for Shift.
 
-## Function layer (hold F-keys on the inner index columns)
+## Function layer (hold F-keys on the inner index columns, or Sym+Nav)
 
 ```
  ,-------------------------------------------.                              ,-------------------------------------------.
- |        |  F9  | F10  | F11  | F12  |      |                              |      |      |      |      |      |  Boot  |
+ |        |  F9  | F10  | F11  | F12  |      |                              |      |  F7  |  F8  |  F9  | F10  |  Boot  |
  |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- |        |  F5  |  F6  |  F7  |  F8  |      |                              |      | Shift| Ctrl |  Alt |  GUI |        |
+ |        |  F5  |  F6  |  F7  |  F8  |      |                              |      |  F4  |  F5  |  F6  | F11  |        |
  |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- |        |  F1  |  F2  |  F3  |  F4  |      |      |      |  |      |      |      |      |      |      |      |        |
+ |        |  F1  |  F2  |  F3  |  F4  |      |      |      |  |      |      |      |  F1  |  F2  |  F3  | F12  |        |
  `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
 ```
+
+The right half mirrors the numpad: the digit position *is* the F-number
+(`F5` sits where numpad `5` sits). Modifiers held on the base home row stay
+held across the layer switch — `Alt+F4` is: hold `Alt/I`, hold F-keys, tap
+`F4`.
 
 ## Adjust layer (hold Adjust on the inner index columns)
 
@@ -185,6 +190,8 @@ gaming, extra buttons on SCII).
   two keys holding it is released; `post_process_record_user` counts active
   layer keys and re-asserts the layer until the last one is released (e.g.
   Sym held on both thumbs stays on until both lift).
+- **Tri-layer**: holding Sym and Nav together activates Adjust — no finger
+  gymnastics needed for RGB / layout switching.
 - Caps Word with a 5 s idle timeout; umlaut keys and the compose keys they
   send are whitelisted so Caps Word survives umlauts.
 - Encoders: left = volume, right = Page Down / Page Up.
