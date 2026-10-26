@@ -118,7 +118,7 @@ combo_t key_combos[] = {
 // Shift+Backspace sends Delete. Works with Caps Word's weak Shift too;
 // Ctrl/Alt/Gui variants are excluded by the ko_make_basic defaults.
 const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
-const key_override_t **key_overrides = (const key_override_t *[]){
+const key_override_t *key_overrides[] = {
     &delete_key_override,
     NULL
 };
@@ -129,11 +129,10 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 // ring/pinky rolls can otherwise still misfire as a hold (getreuer's fix).
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case CH_A:
+        case CH_A:  // CH_A and QH_A are the same keycode (LCTL_T(KC_A))
         case CH_R:
         case CH_I:
         case CH_O:
-        case QH_A:
         case QH_S:
         case QH_L:
         case QH_SCLN:
@@ -310,7 +309,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Function Layer: F-keys on the left, and mirrored onto the numpad positions
  * on the right (digit position = F-number; mods held on the base home row
  * stay held across the layer switch, e.g. Alt+F4 = hold Alt/I + F-keys + F4).
- */
+ *
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |  F9  | F10  | F11  | F12  |      |                              |      |  F7  |  F8  |  F9  | F10  |  Boot  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
