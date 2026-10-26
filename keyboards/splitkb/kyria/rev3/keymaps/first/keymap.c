@@ -115,9 +115,12 @@ combo_t key_combos[] = {
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
 // produces the key `tap` when tapped (i.e. pressed and released).
 
-// Shift+Backspace sends Delete. Works with Caps Word's weak Shift too;
-// Ctrl/Alt/Gui variants are excluded by the ko_make_basic defaults.
-const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
+// Shift+Backspace sends Delete. Backspace only exists as the tap action of
+// LT(_SYM, KC_BSPC), so the override must trigger on that full keycode —
+// QMK matches the keycode as it flows through the process chain, before
+// tap resolution. Matches real Shift (get_mods()) only; Caps Word's weak
+// Shift does not trigger it (weak mods are excluded by default).
+const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, LT(_SYM, KC_BSPC), KC_DEL);
 const key_override_t *key_overrides[] = {
     &delete_key_override,
     NULL
