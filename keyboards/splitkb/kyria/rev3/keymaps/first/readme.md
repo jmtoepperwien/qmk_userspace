@@ -84,13 +84,19 @@ mods. Accessed from the Adjust layer. QWERTY is also the base for the
  ,-------------------------------------------.                              ,-------------------------------------------.
  |        |      |      |      |      |      |                              |      | PgDn | PgUp |      |      |        |
  |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- |        |      |      |      |      |      |                              |   ←  |   ↓  |   ↑  |   →  |      |        |
+ |        |      |SelWd |      |      |      |                              |   ←  |   ↓  |   ↑  |   →  |      |        |
  |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  |        |      |      |      |      |      |      |      |  |      | Home |  End |M Prev|M Play|M Next|VolMut| PrtSc  |
  `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
                         |      |      |      |      |      |  |      |      |      |      |      |
                         `----------------------------------'  `----------------------------------'
 ```
+
+**Select Word** (`SelWd`, from the `getreuer/select_word` community module,
+wired in via `keymap.json` + the `modules/getreuer` submodule): tap to select
+the word under the cursor, tap again to extend to the next word; hold Shift
+while tapping to select whole lines instead. Base home-row mods stay held
+across the layer switch, so hold `A` (Ctrl) + Nav + `SelWd` + `C` = copy.
 
 ## Sym layer (hold either Sym thumb)
 
