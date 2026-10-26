@@ -36,6 +36,7 @@ Umlauts are sent as XKB compose sequences using the **Menu key as Compose**:
 | `Compose` `Shift+'` `a`      | Ä      |
 | `Compose` `'` `o` / `u`      | ö / ü  |
 | `Compose` `s` `s`            | ß      |
+| `Compose` `=` `e`            | € (on the Sym layer, bottom-left inner key) |
 
 Host requirements:
 
@@ -99,7 +100,7 @@ mods. Accessed from the Adjust layer. QWERTY is also the base for the
  |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  |        |   !  |   -  |   +  |   =  |   `  |                              |   $  |   _  |   (  |   )  |   %  |        |
  |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- |        |   ^  |   #  |   *  |   @  |   0  |      |      |  |      |      |   1  |   |  |   {  |   }  |      |        |
+ |        |   ^  |   #  |   *  |   @  |  €   |      |      |  |      |      |   1  |   |  |   {  |   }  |      |        |
  `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
 ```
 
@@ -194,6 +195,8 @@ gaming, extra buttons on SCII).
   gymnastics needed for RGB / layout switching.
 - Caps Word with a 5 s idle timeout; umlaut keys and the compose keys they
   send are whitelisted so Caps Word survives umlauts.
+- **Shift+Backspace → Delete** (key override; Caps Word's weak Shift counts
+  as well — no need for the right-thumb Delete reach).
 - Encoders: left = volume, right = Page Down / Page Up.
 - OLEDs: master shows board, layer, and host LED locks; slave shows the Kyria
   logo. Fade out after 10 s, brightness 64. (Disabled entirely in `work`.)

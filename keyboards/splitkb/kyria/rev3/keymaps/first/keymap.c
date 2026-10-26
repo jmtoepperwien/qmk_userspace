@@ -74,6 +74,7 @@ enum custom_keycodes {
     CK_OE,               // ö / Ö
     CK_UE,               // ü / Ü
     CK_SS,               // ß
+    CK_EURO,             // €
 };
 
 // Home Row Mods for Colemak_DH
@@ -113,6 +114,14 @@ combo_t key_combos[] = {
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
 // produces the key `tap` when tapped (i.e. pressed and released).
+
+// Shift+Backspace sends Delete. Works with Caps Word's weak Shift too;
+// Ctrl/Alt/Gui variants are excluded by the ko_make_basic defaults.
+const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
+const key_override_t **key_overrides = (const key_override_t *[]){
+    &delete_key_override,
+    NULL
+};
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -251,7 +260,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_SYM] = LAYOUT(
       _______ ,   KC_TILDE ,   KC_LABK ,   KC_RABK ,   KC_QUOT, _______,                                       KC_AMPERSAND ,   KC_DQUO,   KC_LBRC ,   KC_RBRC ,   KC_BACKSLASH , _______,
      _______ , KC_EXLM,  KC_MINUS, KC_PLUS,  KC_EQUAL, KC_GRV,                                     KC_DOLLAR, KC_UNDS, KC_LPRN, KC_RPRN, KC_PERC, _______,
-     _______ ,KC_CIRC , KC_HASH, KC_ASTR, KC_AT, KC_0, _______, _______, _______, _______, KC_1, KC_PIPE, KC_LCBR, KC_RCBR, _______, _______,
+     _______ ,KC_CIRC , KC_HASH, KC_ASTR, KC_AT, CK_EURO, _______, _______, _______, _______, KC_1, KC_PIPE, KC_LCBR, KC_RCBR, _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -590,6 +599,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case CK_SS:
             SEND_STRING(SS_TAP(X_APP) SS_TAP(X_S) SS_TAP(X_S));
+            return false;
+        case CK_EURO:
+            SEND_STRING(SS_TAP(X_APP) SS_TAP(X_EQL) SS_TAP(X_E));
             return false;
     }
     set_mods(mods);
