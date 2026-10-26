@@ -123,6 +123,26 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     NULL
 };
 
+// Pinky and ring fingers are slower to land the next key of a roll. Give
+// their home row mods a slightly longer decision window — Chordal Hold
+// settles same-hand rolls as tap within the tapping term, so slow
+// ring/pinky rolls can otherwise still misfire as a hold (getreuer's fix).
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CH_A:
+        case CH_R:
+        case CH_I:
+        case CH_O:
+        case QH_A:
+        case QH_S:
+        case QH_L:
+        case QH_SCLN:
+            return TAPPING_TERM + 15;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
