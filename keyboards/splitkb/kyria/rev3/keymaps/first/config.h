@@ -46,8 +46,6 @@
 // Auto-off after 5 s idle so Caps Word doesn't stay stuck on
 #define CAPS_WORD_IDLE_TIMEOUT 5000
 
-#define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX
-
 #define OLED_BRIGHTNESS 64
 #define OLED_TIMEOUT 10000
 #define OLED_FADE_OUT

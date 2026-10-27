@@ -538,8 +538,11 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     // Hold Sym and Nav together (thumbs) for the Adjust layer.
     state = update_tri_layer_state(state, _SYM, _NAV, _ADJUST);
-    data_config.layer = layer_to_data(get_highest_layer(state|default_layer_state));
-    raw_hid_send((unsigned char*)&data_config, 32);
+    // Raw HID is a master-half thing; also skip before USB is up.
+    if (is_keyboard_master()) {
+        data_config.layer = layer_to_data(get_highest_layer(state|default_layer_state));
+        raw_hid_send((unsigned char*)&data_config, 32);
+    }
     return state;
 }
 
@@ -671,7 +674,8 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
             break;
     }
     // Also allow during gaming
-    if (layer_to_data(get_highest_layer(layer_state|default_layer_state)) == G_GAMING || layer_to_data(get_highest_layer(layer_state|default_layer_state)) == G_GAMING_SCII) {
+    uint8_t common_layer = layer_to_data(get_highest_layer(layer_state|default_layer_state));
+    if (common_layer == G_GAMING || common_layer == G_GAMING_SCII) {
         return true;
     }
     // Otherwise defer to the opposite hands rule.
