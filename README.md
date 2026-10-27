@@ -1,59 +1,75 @@
-# QMK Userspace
+# QMK Userspace — crunchyflakes
 
-This is a template repository which allows for an external set of QMK keymaps to be defined and compiled. This is useful for users who want to maintain their own keymaps without having to fork the main QMK repository.
+Personal [QMK userspace](https://github.com/qmk/qmk_userspace) for a splitkb
+Kyria rev3 keyboard and a Ploopy Classic 2 trackball, used daily on Linux.
 
-## Howto configure your build targets
+## Keymaps
 
-1. Run the normal `qmk setup` procedure if you haven't already done so -- see [QMK Docs](https://docs.qmk.fm/#/newbs) for details.
-1. Fork this repository
-1. Clone your fork to your local machine
-1. Enable userspace in QMK config using `qmk config user.overlay_dir="$(realpath qmk_userspace)"`
-1. Add a new keymap for your board using `qmk new-keymap`
-    * This will create a new keymap in the `keyboards` directory, in the same location that would normally be used in the main QMK repository. For example, if you wanted to add a keymap for the Planck, it will be created in `keyboards/planck/keymaps/<your keymap name>`
-    * You can also create a new keymap using `qmk new-keymap -kb <your_keyboard> -km <your_keymap>`
-    * Alternatively, add your keymap manually by placing it in the location specified above.
-    * `layouts/<layout name>/<your keymap name>/keymap.*` is also supported if you prefer the layout system
-1. Add your keymap(s) to the build by running `qmk userspace-add -kb <your_keyboard> -km <your_keymap>`
-    * This will automatically update your `qmk.json` file
-    * Corresponding `qmk userspace-remove -kb <your_keyboard> -km <your_keymap>` will delete it
-    * Listing the build targets can be done with `qmk userspace-list`
-1. Commit your changes
+| Keyboard | Keymap | Purpose |
+|----------|--------|---------|
+| `splitkb/kyria/rev3` | [`first`](keyboards/splitkb/kyria/rev3/keymaps/first) | Daily driver — typing, programming, German text, gaming |
+| `splitkb/kyria/rev3` | [`work`](keyboards/splitkb/kyria/rev3/keymaps/work) | Same as `first` (shared via `#include`), OLEDs disabled |
+| `ploopyco/trackball/rev1_007` | [`default`](keyboards/ploopyco/trackball/keymaps/default) | Ploopy Classic 2 trackball, follows the Kyria's mode |
 
-## Howto build with GitHub
+### Kyria (`first` / `work`)
 
-1. In the GitHub Actions tab, enable workflows
-1. Push your changes above to your forked GitHub repository
-1. Look at the GitHub Actions for a new actions run
-1. Wait for the actions run to complete
-1. Inspect the Releases tab on your repository for the latest firmware build
+Full layer diagrams and details: [keymap readme](keyboards/splitkb/kyria/rev3/keymaps/first/readme.md).
 
-## Howto build locally
+- **Colemak-DH** base layer, with QWERTY and Dvorak alternatives.
+- **Home row mods** tuned with Chordal Hold, Permissive Hold and Speculative
+  Hold (longer tapping term on pinky/ring; one-handed Ctrl+C / Ctrl+V allowed).
+- **Thumb-driven layers**: Nav, Sym, Num and Umlaut on the thumbs; Sym + Nav
+  together = Adjust (tri-layer). Layers held by two keys stay on until both
+  are released.
+- **German umlauts and €** via XKB compose sequences (Menu = Compose), so the
+  host layout stays US; works with Shift and Caps Word.
+- **Caps Word** on a thumb tap, with a 5 s idle timeout.
+- **Shift+Backspace → Delete** on tap only (holding the key still gives Sym).
+- **Select Word** on the Nav layer (`getreuer/select_word` module).
+- **Gaming**: five layers without tap-hold keys (Colemak, QWERTY, StarCraft II,
+  FPS overlay, nav/num), forced NKRO, and a Tab+Y → J combo active only there.
+- **Extras**: encoders (volume, Page Up/Down), OLED layer display, and layer
+  sync to the trackball over Raw HID.
 
-1. Run the normal `qmk setup` procedure if you haven't already done so -- see [QMK Docs](https://docs.qmk.fm/#/newbs) for details.
-1. Fork this repository
-1. Clone your fork to your local machine
-1. `cd` into this repository's clone directory
-1. Set global userspace path: `qmk config user.overlay_dir="$(realpath .)"` -- you MUST be located in the cloned userspace location for this to work correctly
-    * This will be automatically detected if you've `cd`ed into your userspace repository, but the above makes your userspace available regardless of your shell location.
-1. Compile normally: `qmk compile -kb your_keyboard -km your_keymap` or `make your_keyboard:your_keymap`
+### Ploopy trackball (`default`)
 
-Alternatively, if you configured your build targets above, you can use `qmk userspace-compile` to build all of your userspace targets at once.
+- Buttons: left click, middle click, right click, momentary (inverted) drag
+  scroll, and mouse button 5.
+- DPI options 400 / 600 / 1200 / 1600 (default 1600).
+- **Follows the Kyria's mode**: the Kyria sends its mode (default / adjust /
+  gaming / gaming-SC2) over Raw HID, and a host-side relay forwards it to the
+  trackball, which switches layers:
+  - Gaming: left button = Space, drag-scroll button = mouse button 4.
+  - Gaming-SC2: extra mouse buttons 4 and 5.
+  - Adjust: a button becomes `QK_BOOT` for flashing.
 
-## Extra info
+## Modules
 
-If you wish to point GitHub actions to a different repository, a different branch, or even a different keymap name, you can modify `.github/workflows/build_binaries.yml` to suit your needs.
+[getreuer/qmk-modules](https://github.com/getreuer/qmk-modules) is included as
+a git submodule in `modules/getreuer` (currently used: `select_word`). Clone
+with:
 
-To override the `build` job, you can change the following parameters to use a different QMK repository or branch:
+```sh
+git clone --recurse-submodules <repo-url>
+# or, in an existing clone:
+git submodule update --init --recursive
 ```
-    with:
-      qmk_repo: qmk/qmk_firmware
-      qmk_ref: master
+
+## Building
+
+**GitHub Actions**: every push builds all targets listed in `qmk.json` and
+attaches the firmware to the repository's Releases.
+
+**Locally** (needs `qmk setup` done first):
+
+```sh
+qmk config user.overlay_dir="$(realpath .)"   # run from this repo
+qmk userspace-compile                         # all targets
+qmk compile -kb splitkb/kyria/rev3 -km first  # or a single one
 ```
 
-If you wish to manually manage `qmk_firmware` using git within the userspace repository, you can add `qmk_firmware` as a submodule in the userspace directory instead. GitHub Actions will automatically use the submodule at the pinned revision if it exists, otherwise it will use the default latest revision of `qmk_firmware` from the main repository.
+## Flashing
 
-This can also be used to control which fork is used, though only upstream `qmk_firmware` will have support for external userspace until other manufacturers update their forks.
-
-1. (First time only) `git submodule add https://github.com/qmk/qmk_firmware.git`
-1. (To update) `git submodule update --init --recursive`
-1. Commit your changes to your userspace repository
+Both boards are RP2040: double-tap reset (on the Kyria, once per half), then
+copy the `.uf2` onto the mounted drive. On a running board, `QK_BOOT` (Kyria:
+Function or Adjust layer; trackball: Adjust mode) enters the bootloader too.
