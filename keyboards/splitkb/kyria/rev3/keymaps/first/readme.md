@@ -3,8 +3,9 @@
 Personal keymap for the splitkb.com Kyria rev3 (50 keys, converted to liatris /
 RP2040), used daily on Linux for typing (Colemak-DH), programming, German text,
 and gaming — paired with a Ploopy trackball running the customized keymap in
-[`keyboards/ploopyco/trackball`](../../../../../ploopyco/trackball) from this
-same userspace repo.
+[`keyboards/ploopyco/trackball/keymaps/default`](../../../../../ploopyco/trackball/keymaps/default)
+from this same userspace repo (the keyboard definition itself comes from
+qmk_firmware).
 
 Design goals:
 
