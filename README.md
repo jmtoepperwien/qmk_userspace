@@ -140,3 +140,10 @@ python3 keymap-drawer/draw.py
 Both boards are RP2040: double-tap reset (on the Kyria, once per half), then
 copy the `.uf2` onto the mounted drive. On a running board, `QK_BOOT` (Kyria:
 Function or Adjust layer; trackball: Adjust mode) enters the bootloader too.
+
+## Acknowledgements
+
+This userspace is heavily influenced by
+[ratoru/qmk_userspace](https://github.com/ratoru/qmk_userspace): the whole
+setup of the Kyria keymap — home row mods, thumb layers, corner-legend layer
+figures — follows it, and the keymap-drawer tooling is ported from it.
