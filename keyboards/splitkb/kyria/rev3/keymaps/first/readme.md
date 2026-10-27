@@ -27,8 +27,9 @@ The `work` keymap is a fork of this one that shares everything via
 `#include` and only disables the OLEDs (office policy: no side channels on the
 display).
 
-An auto-generated drawing of all layers lives in
-[`docs/generated/kyria/kyria.svg`](../../../../../../docs/generated/kyria/kyria.svg).
+An auto-generated drawing of the base layer with Nav/Sym/Num shown as corner
+legends lives in
+[`docs/keymaps/kyria/overview.svg`](../../../../../../docs/keymaps/kyria/overview.svg).
 
 ## Host setup (Linux)
 

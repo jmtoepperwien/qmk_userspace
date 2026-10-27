@@ -55,10 +55,6 @@ More details: [keymap readme](keyboards/splitkb/kyria/rev3/keymaps/first/readme.
 - **Extras**: encoders (volume, Page Up/Down), OLED layer display, and layer
   sync to the trackball over Raw HID.
 
-Auto-generated layer drawing (all 14 layers):
-
-![Kyria keymap](docs/generated/kyria/kyria.svg)
-
 ### Ploopy trackball (`default`)
 
 ![Ploopy layers](docs/keymaps/ploopy/layers.svg)
@@ -106,20 +102,11 @@ just compile-all       # every keymap in qmk.json
 just compile first     # one keymap: first, work or trackball
 ```
 
-## Drawing your keymap
-
-The Kyria layer drawing above is generated with
-[keymap-drawer](https://github.com/caksoylar/keymap-drawer) and committed under
-`docs/generated/`. A pre-commit hook redraws it whenever `keymap.c` changes.
-
-One-time setup (needs [uv](https://docs.astral.sh/uv/), `just`, and `qmk setup`
-done — the parse step shells out to `qmk c2json`):
+Code style and YAML/JSON checks run via [pre-commit](https://pre-commit.com):
 
 ```sh
 uv sync
-uv run pre-commit install
-just draw first   # regenerate docs/generated/kyria/{kyria.yaml,kyria.svg}
-just format       # clang-format all C sources (also runs as a pre-commit hook)
+uv run pre-commit install   # clang-format (needs clang-format), yaml/json checks
 ```
 
 ## Layer figures

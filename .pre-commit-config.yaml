@@ -3,21 +3,13 @@ repos:
     hooks:
       - id: format
         name: Format C code
-        entry: just format
+        entry: clang-format -i
         language: system
-        always_run: true
-        pass_filenames: false
-      - id: draw-all
-        name: Draw keymaps
-        entry: just draw-all
-        language: system
-        files: (keymap\.c|keymap\.json|drawer_config\.yaml|justfile)$
-        pass_filenames: false
+        files: '\.(c|h)$'
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
     - id: trailing-whitespace
-      exclude: ^docs/generated/
     - id: end-of-file-fixer
     - id: check-yaml
     - id: check-json
