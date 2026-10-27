@@ -27,6 +27,9 @@ The `work` keymap is a fork of this one that shares everything via
 `#include` and only disables the OLEDs (office policy: no side channels on the
 display).
 
+An auto-generated drawing of all layers lives in
+[`docs/generated/kyria/kyria.svg`](../../../../../../docs/generated/kyria/kyria.svg).
+
 ## Host setup (Linux)
 
 Umlauts are sent as XKB compose sequences using the **Menu key as Compose**:
