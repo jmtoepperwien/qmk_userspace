@@ -618,25 +618,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_AE:
             if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_A))); }
             else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_A)); }
-            return false;
+            break;
         case CK_OE:
             if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_O))); }
             else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_O)); }
-            return false;
+            break;
         case CK_UE:
             if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_U))); }
             else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_U)); }
-            return false;
+            break;
         case CK_SS:
             SEND_STRING(SS_TAP(X_APP) SS_TAP(X_S) SS_TAP(X_S));
-            return false;
+            break;
         case CK_EURO:
             SEND_STRING(SS_TAP(X_APP) SS_TAP(X_EQL) SS_TAP(X_E));
-            return false;
+            break;
+        default:
+            set_mods(mods);
+            add_weak_mods(weak_shift);
+            return true;
     }
+    // The compose sequence was tapped without mods; put the caller's mods
+    // back so a still-held Shift keeps applying to subsequent keys.
     set_mods(mods);
     add_weak_mods(weak_shift);
-    return true;
+    return false;
 }
 
 // Runs after QMK's built-in handling: undo the layer_off if another key still
