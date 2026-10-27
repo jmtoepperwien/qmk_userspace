@@ -534,7 +534,7 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     // Hold Sym and Nav together (thumbs) for the Adjust layer.
     state = update_tri_layer_state(state, _SYM, _NAV, _ADJUST);
-    // Raw HID is a master-half thing; also skip before USB is up.
+    // Raw HID only exists on the master half; on the slave this is a no-op.
     if (is_keyboard_master()) {
         data_config.layer = layer_to_data(get_highest_layer(state | default_layer_state));
         raw_hid_send((unsigned char *)&data_config, 32);
