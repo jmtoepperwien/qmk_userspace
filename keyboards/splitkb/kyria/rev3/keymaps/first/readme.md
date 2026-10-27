@@ -205,8 +205,9 @@ gaming, extra buttons on SCII).
   gymnastics needed for RGB / layout switching.
 - Caps Word with a 5 s idle timeout; umlaut keys and the compose keys they
   send are whitelisted so Caps Word survives umlauts.
-- **Shift+Backspace → Delete** (key override on the Sym/Bksp thumb; real
-  Shift only — Caps Word does not trigger it).
+- **Shift+Backspace → Delete** (tap of the Sym/Bksp thumb only, so
+  holding it for Sym still works with Shift; real Shift only — Caps Word
+  does not trigger it).
 - Encoders: left = volume, right = Page Down / Page Up.
 - OLEDs: master shows board, layer, and host LED locks; slave shows the Kyria
   logo. Fade out after 10 s, brightness 64. (Disabled entirely in `work`.)

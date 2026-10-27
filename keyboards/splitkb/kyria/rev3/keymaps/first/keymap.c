@@ -115,17 +115,6 @@ combo_t key_combos[] = {
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
 // produces the key `tap` when tapped (i.e. pressed and released).
 
-// Shift+Backspace sends Delete. Backspace only exists as the tap action of
-// LT(_SYM, KC_BSPC), so the override must trigger on that full keycode —
-// QMK matches the keycode as it flows through the process chain, before
-// tap resolution. Matches real Shift (get_mods()) only; Caps Word's weak
-// Shift does not trigger it (weak mods are excluded by default).
-const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, LT(_SYM, KC_BSPC), KC_DEL);
-const key_override_t *key_overrides[] = {
-    &delete_key_override,
-    NULL
-};
-
 // Pinky and ring fingers are slower to land the next key of a roll. Give
 // their home row mods a slightly longer decision window — Chordal Hold
 // settles same-hand rolls as tap within the tapping term, so slow
@@ -597,6 +586,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (keycode == UML_CW && record->tap.count) {
         if (record->event.pressed) caps_word_toggle();
         return false;
+    }
+    // Shift+Backspace sends Delete — on tap only. (A key override can't be
+    // used: it matches the LT keycode on hold too and swallows the press, so
+    // the Sym layer never activates, breaking Shift+Sym chords.) Real Shift
+    // only; Caps Word's weak Shift does not trigger it.
+    if (keycode == LT(_SYM, KC_BSPC) && record->tap.count) {
+        static bool del_registered = false;
+        if (record->event.pressed && (get_mods() & MOD_MASK_SHIFT)) {
+            uint8_t m = get_mods();
+            del_mods(MOD_MASK_SHIFT);
+            register_code(KC_DEL);
+            set_mods(m);
+            del_registered = true;
+            return false;
+        } else if (!record->event.pressed && del_registered) {
+            unregister_code(KC_DEL);
+            del_registered = false;
+            return false;
+        }
     }
     if (!record->event.pressed) return true;
     uint8_t mods = get_mods();
