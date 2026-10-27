@@ -10,6 +10,9 @@
 *.bin
 *.uf2
 
+# Python
+.venv/
+
 # clangd
 compile_commands.json
 .clangd/

@@ -18,14 +18,12 @@
 #include "raw_hid.h"
 
 typedef struct __attribute__((packed)) {
-  uint8_t report_id;
-  uint8_t layer;
-  uint8_t command;
-  uint8_t argument;
-  uint8_t reserved[29];
+    uint8_t report_id;
+    uint8_t layer;
+    uint8_t command;
+    uint8_t argument;
+    uint8_t reserved[29];
 } data_config_t;
-
-
 
 enum layers {
     _COLEMAK_DH = 0,
@@ -44,37 +42,36 @@ enum layers {
     _UMLAUT,
 };
 
-
 // Aliases for readability
-#define COLEMAK         DF(_COLEMAK_DH)
-#define QWERTY          DF(_QWERTY)
-#define DVORAK          DF(_DVORAK)
+#define COLEMAK DF(_COLEMAK_DH)
+#define QWERTY DF(_QWERTY)
+#define DVORAK DF(_DVORAK)
 
-#define GAMING          DF(_GAMING)
-#define GAMING_QWERTY   DF(_GAMING_QWERTY)
-#define GAMING_SCII     DF(_GAMING_SCII)
-#define GAMING_FPS      TG(_GAMING_FPS)
+#define GAMING DF(_GAMING)
+#define GAMING_QWERTY DF(_GAMING_QWERTY)
+#define GAMING_SCII DF(_GAMING_SCII)
+#define GAMING_FPS TG(_GAMING_FPS)
 #define GAMING_NAVNUM MO(_GAMING_NAVNUM)
-#define SYM      MO(_SYM)
-#define NUM      MO(_NUM)
-#define NAV      MO(_NAV)
+#define SYM MO(_SYM)
+#define NUM MO(_NUM)
+#define NAV MO(_NAV)
 #define FUNCTION MO(_FUNCTION)
-#define ADJUST   MO(_ADJUST)
+#define ADJUST MO(_ADJUST)
 
-#define CTL_ESC  MT(MOD_LCTL, KC_ESC)
+#define CTL_ESC MT(MOD_LCTL, KC_ESC)
 #define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
 #define CTL_MINS MT(MOD_RCTL, KC_MINUS)
-#define ALT_ENT  MT(MOD_LALT, KC_ENT)
+#define ALT_ENT MT(MOD_LALT, KC_ENT)
 // LT only takes basic keycodes; tap → Caps Word is handled in process_record_user
-#define UML_CW   LT(_UMLAUT, KC_NO)
+#define UML_CW LT(_UMLAUT, KC_NO)
 
 // Umlaut keycodes — sent via XKB compose sequences (KC_APP = compose key)
 enum custom_keycodes {
-    CK_AE = SAFE_RANGE,  // ä / Ä
-    CK_OE,               // ö / Ö
-    CK_UE,               // ü / Ü
-    CK_SS,               // ß
-    CK_EURO,             // €
+    CK_AE = SAFE_RANGE, // ä / Ä
+    CK_OE,              // ö / Ö
+    CK_UE,              // ü / Ü
+    CK_SS,              // ß
+    CK_EURO,            // €
 };
 
 // Home Row Mods for Colemak_DH
@@ -107,7 +104,7 @@ enum custom_keycodes {
 // Gaming specific
 
 const uint16_t PROGMEM upper_left_combo[] = {KC_TAB, KC_Y, COMBO_END};
-combo_t key_combos[] = {
+combo_t                key_combos[]       = {
     COMBO(upper_left_combo, KC_J),
 };
 
@@ -121,7 +118,7 @@ combo_t key_combos[] = {
 // ring/pinky rolls can otherwise still misfire as a hold (getreuer's fix).
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case CH_A:  // CH_A and QH_A are the same keycode (LCTL_T(KC_A))
+        case CH_A: // CH_A and QH_A are the same keycode (LCTL_T(KC_A))
         case CH_R:
         case CH_I:
         case CH_O:
@@ -410,7 +407,7 @@ bool oled_task_user(void) {
 
         // Host Keyboard Layer Status
         oled_write_P(PSTR("Layer: "), false);
-        switch (get_highest_layer(layer_state|default_layer_state)) {
+        switch (get_highest_layer(layer_state | default_layer_state)) {
             case _QWERTY:
                 oled_write_P(PSTR("QWERTY\n"), false);
                 break;
@@ -456,8 +453,8 @@ bool oled_task_user(void) {
 
         // Write host Keyboard LED Status to OLEDs
         led_t led_usb_state = host_keyboard_led_state();
-        oled_write_P(led_usb_state.num_lock    ? PSTR("NUMLCK ") : PSTR("       "), false);
-        oled_write_P(led_usb_state.caps_lock   ? PSTR("CAPLCK ") : PSTR("       "), false);
+        oled_write_P(led_usb_state.num_lock ? PSTR("NUMLCK ") : PSTR("       "), false);
+        oled_write_P(led_usb_state.caps_lock ? PSTR("CAPLCK ") : PSTR("       "), false);
         oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
     } else {
         // clang-format off
@@ -480,7 +477,6 @@ bool oled_task_user(void) {
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
-
     if (index == 0) {
         // Volume control
         if (clockwise) {
@@ -503,9 +499,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 static volatile data_config_t data_config = {0};
 
 enum common_layers {
-    G_DEFAULT = 0,
-    G_ADJUST = 1,
-    G_GAMING = 2,
+    G_DEFAULT     = 0,
+    G_ADJUST      = 1,
+    G_GAMING      = 2,
     G_GAMING_SCII = 3,
 };
 
@@ -531,8 +527,8 @@ void keyboard_pre_init_user(void) {
 }
 
 void raw_hid_receive(uint8_t *data, uint8_t length) {
-    data_config.layer = layer_to_data(get_highest_layer(layer_state|default_layer_state));
-    raw_hid_send((unsigned char*)&data_config, 32);
+    data_config.layer = layer_to_data(get_highest_layer(layer_state | default_layer_state));
+    raw_hid_send((unsigned char *)&data_config, 32);
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
@@ -540,8 +536,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     state = update_tri_layer_state(state, _SYM, _NAV, _ADJUST);
     // Raw HID is a master-half thing; also skip before USB is up.
     if (is_keyboard_master()) {
-        data_config.layer = layer_to_data(get_highest_layer(state|default_layer_state));
-        raw_hid_send((unsigned char*)&data_config, 32);
+        data_config.layer = layer_to_data(get_highest_layer(state | default_layer_state));
+        raw_hid_send((unsigned char *)&data_config, 32);
     }
     return state;
 }
@@ -582,9 +578,11 @@ bool caps_word_press_user(uint16_t keycode) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     uint8_t layer = layer_of_keycode(keycode);
-    if (layer != 255 && record->tap.count == 0) {  // taps don't change holds
-        if (record->event.pressed) { if (layer_holds[layer] < 255) layer_holds[layer]++; }
-        else if (layer_holds[layer]) layer_holds[layer]--;
+    if (layer != 255 && record->tap.count == 0) { // taps don't change holds
+        if (record->event.pressed) {
+            if (layer_holds[layer] < 255) layer_holds[layer]++;
+        } else if (layer_holds[layer])
+            layer_holds[layer]--;
     }
     if (keycode == UML_CW && record->tap.count) {
         if (record->event.pressed) caps_word_toggle();
@@ -610,8 +608,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
     }
     if (!record->event.pressed) return true;
-    uint8_t mods = get_mods();
-    bool shifted = (mods & MOD_MASK_SHIFT) || is_caps_word_on();
+    uint8_t mods    = get_mods();
+    bool    shifted = (mods & MOD_MASK_SHIFT) || is_caps_word_on();
     // Umlauts are sent as XKB compose sequences; strip Shift (real and Caps
     // Word's weak Shift) so the sequence keysyms match, then restore.
     uint8_t weak_shift = get_weak_mods() & MOD_MASK_SHIFT;
@@ -619,16 +617,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     del_weak_mods(MOD_MASK_SHIFT);
     switch (keycode) {
         case CK_AE:
-            if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_A))); }
-            else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_A)); }
+            if (shifted) {
+                SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_A)));
+            } else {
+                SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_A));
+            }
             break;
         case CK_OE:
-            if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_O))); }
-            else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_O)); }
+            if (shifted) {
+                SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_O)));
+            } else {
+                SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_O));
+            }
             break;
         case CK_UE:
-            if (shifted) { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_U))); }
-            else         { SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_U)); }
+            if (shifted) {
+                SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_LSFT(SS_TAP(X_U)));
+            } else {
+                SEND_STRING(SS_TAP(X_APP) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_U));
+            }
             break;
         case CK_SS:
             SEND_STRING(SS_TAP(X_APP) SS_TAP(X_S) SS_TAP(X_S));
@@ -663,8 +670,7 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
     return base == G_GAMING || base == G_GAMING_SCII;
 }
 
-bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
-                      uint16_t other_keycode, keyrecord_t* other_record) {
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record, uint16_t other_keycode, keyrecord_t *other_record) {
     // Exceptionally allow some one-handed chords for hotkeys.
     switch (tap_hold_keycode) {
         case CH_A:
@@ -674,7 +680,7 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
             break;
     }
     // Also allow during gaming
-    uint8_t common_layer = layer_to_data(get_highest_layer(layer_state|default_layer_state));
+    uint8_t common_layer = layer_to_data(get_highest_layer(layer_state | default_layer_state));
     if (common_layer == G_GAMING || common_layer == G_GAMING_SCII) {
         return true;
     }
