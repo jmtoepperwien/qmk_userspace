@@ -1,0 +1,162 @@
+# keymap-drawer config — dark Catppuccin (Mocha) look.
+# Overview legend colors: tap = lavender (big, top-left), Nav = blue (top-right),
+# Sym = yellow (bottom-left), Num = green (bottom-right), hold mod = mauve.
+draw_config:
+  key_w: 74
+  key_h: 70
+  key_rx: 12
+  key_ry: 12
+  inner_pad_w: 7
+  inner_pad_h: 7
+  outer_pad_w: 40
+  outer_pad_h: 70
+  split_gap: 50
+  n_columns: 1
+  append_colon_to_layer_header: false
+  style_layer_activators: false
+  shrink_wide_legends: 6
+  small_pad: 9
+  glyph_tap_size: 22
+  glyph_hold_size: 16
+  glyph_shifted_size: 18
+  svg_extra_style: |
+    svg.keymap {
+      font-family: "JetBrains Mono", "Fira Code", "DejaVu Sans Mono", ui-monospace, monospace;
+      font-size: 17px; font-weight: 700;
+    }
+    svg.keymap { background-color: #1e1e2e; }
+    rect.key { fill: #2a2b3d; stroke: #b4befe; stroke-width: 2.5; }
+    rect.key.trans, rect.key.ghost { stroke: #45475a; stroke-dasharray: none; stroke-width: 2; }
+    rect.key.held { fill: #45475a; stroke: #f38ba8; }
+    rect.key.nav { stroke: #89dceb; }
+    rect.key.sym { stroke: #f9e2af; }
+    rect.key.num { stroke: #a6e3a1; }
+    rect.key.uml, rect.key.fn, rect.key.adj { stroke: #cba6f7; }
+    text { fill: #cdd6f4; }
+    text.trans { fill: #585b70; }
+    text.tl { font-size: 26px; fill: #cdd6f4; }
+    text.tr { font-size: 15px; fill: #89dceb; }
+    text.bl { font-size: 18px; fill: #f9e2af; }
+    text.br { font-size: 18px; fill: #a6e3a1; }
+    text.shifted { font-size: 12px; fill: #cba6f7; }
+    text.hold { font-size: 13px; fill: #cba6f7; }
+    text.nav.hold { fill: #89dceb; }
+    text.sym.hold { fill: #f9e2af; }
+    text.num.hold { fill: #a6e3a1; }
+    use.tr { fill: #89dceb; color: #89dceb; }
+    use.tap { fill: #cdd6f4; }
+    text.fn.tap, text.adj.tap { font-size: 13px; }
+    text.label { fill: #7f849c; stroke-width: 0; font-size: 22px; }
+    text.footer { fill: #585b70; stroke-width: 0; font-size: 18px; }
+parse_config:
+  trans_legend: {t: "", type: trans}
+  qmk_keycode_map:
+    XXXXXXX: ""
+    "NO": ""
+    # mods (hold legends)
+    LCTL: Ctrl
+    RCTL: Ctrl
+    LSFT: Shift
+    RSFT: Shift
+    LALT: Alt
+    RALT: Alt
+    LGUI: Super
+    RGUI: Super
+    MOD_LCTL: Ctrl
+    MOD_RCTL: Ctrl
+    MOD_LSFT: Shift
+    MOD_RSFT: Shift
+    MOD_LALT: Alt
+    MOD_RALT: Alt
+    MOD_LGUI: Super
+    MOD_RGUI: Super
+    # punctuation
+    MINUS: "-"
+    MINS: "-"
+    EQUAL: "="
+    EQL: "="
+    LBRC: "["
+    RBRC: "]"
+    BACKSLASH: \
+    BSLS: \
+    SCLN: ";"
+    QUOT: "'"
+    QUOTE: "'"
+    GRV: "`"
+    COMM: ","
+    DOT: "."
+    SLSH: /
+    SLASH: /
+    TILDE: "~"
+    TILD: "~"
+    EXLM: "!"
+    AT: "@"
+    HASH: "#"
+    DOLLAR: $
+    PERC: "%"
+    CIRC: ^
+    AMPERSAND: "&"
+    ASTR: "*"
+    ASTERISK: "*"
+    LPRN: (
+    RPRN: )
+    UNDS: _
+    PLUS: +
+    LCBR: "{"
+    RCBR: "}"
+    PIPE: "|"
+    COLON: ":"
+    DQUO: '"'
+    LABK: <
+    RABK: ">"
+    # named keys
+    SPC: spc
+    SPACE: spc
+    BSPC: bspc
+    DEL: del
+    ENT: ent
+    TAB: tab
+    ESC: esc
+    CAPS: caps
+    APP: comp
+    LEFT: $$mdi:arrow-left$$
+    RIGHT: $$mdi:arrow-right$$
+    UP: $$mdi:arrow-up$$
+    DOWN: $$mdi:arrow-down$$
+    PGUP: $$mdi:chevron-double-up$$
+    PGDN: $$mdi:chevron-double-down$$
+    HOME: $$mdi:format-horizontal-align-left$$
+    END: $$mdi:format-horizontal-align-right$$
+    PSCR: $$mdi:monitor-screenshot$$
+    PAUSE: pause
+    MPRV: $$mdi:skip-previous$$
+    MNXT: $$mdi:skip-next$$
+    MPLY: $$mdi:play-pause$$
+    MUTE: $$mdi:volume-off$$
+    QK_BOOT: boot
+    QK_CAPS_WORD_TOGGLE: cw
+    SELECT_WORD: $$mdi:select$$
+    # custom keycodes
+    CK_AE: ä
+    CK_OE: ö
+    CK_UE: ü
+    CK_SS: ß
+    CK_EURO: €
+    # RGB
+    RM_TOGG: rgb
+    RM_NEXT: mode→
+    RM_PREV: ←mode
+    RM_HUEU: hue+
+    RM_HUED: hue−
+    RM_SATU: sat+
+    RM_SATD: sat−
+    RM_VALU: bri+
+    RM_VALD: bri−
+    # mouse
+    MS_BTN1: lmb
+    QK_MOUSE_BUTTON_1: lmb
+    QK_MOUSE_BUTTON_2: rmb
+    QK_MOUSE_BUTTON_3: mmb
+    QK_MOUSE_BUTTON_4: back
+    QK_MOUSE_BUTTON_5: fwd
+    DRAG_SCROLL: drag scroll

@@ -1,0 +1,51 @@
+name: Draw keymaps
+
+# Regenerates the layer figures in docs/keymaps/ from keymap.c with
+# keymap-drawer and commits them when they changed.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "keyboards/**/keymap.c"
+      - "keymap-drawer/**"
+      - ".github/workflows/draw_keymaps.yaml"
+
+permissions:
+  contents: write
+
+jobs:
+  draw:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout userspace
+        uses: actions/checkout@v4
+
+      - name: Checkout qmk_firmware
+        uses: actions/checkout@v4
+        with:
+          repository: qmk/qmk_firmware
+          path: qmk_firmware
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install qmk and keymap-drawer
+        run: pip install qmk keymap-drawer pyyaml -r qmk_firmware/requirements.txt
+
+      - name: Draw
+        env:
+          QMK_HOME: ${{ github.workspace }}/qmk_firmware
+        run: python keymap-drawer/draw.py
+
+      - name: Commit figures
+        run: |
+          git add docs/keymaps
+          if git diff --cached --quiet; then
+            echo "Figures unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs(keymaps): redraw layer figures [skip ci]"
+          git push

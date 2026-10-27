@@ -13,7 +13,31 @@ Kyria rev3 keyboard and a Ploopy Classic 2 trackball, used daily on Linux.
 
 ### Kyria (`first` / `work`)
 
-Full layer diagrams and details: [keymap readme](keyboards/splitkb/kyria/rev3/keymaps/first/readme.md).
+![Kyria overview: Colemak-DH with Nav, Sym and Num](docs/keymaps/kyria/overview.svg)
+
+Each key shows its base letter (large, top-left) plus what it sends on
+**Nav** (blue, top-right), **Sym** (yellow, bottom-left) and **Num**
+(green, bottom-right); the small symbol at the bottom is the home row mod
+(⇧ Shift, ⌃ Ctrl, ⌥ Alt, ❖ Super). Thumb keys are outlined in the color of
+the layer they hold.
+
+<details>
+<summary>Other layers</summary>
+
+![Umlaut](docs/keymaps/kyria/umlaut.svg)
+![Function](docs/keymaps/kyria/function.svg)
+![Adjust](docs/keymaps/kyria/adjust.svg)
+![QWERTY](docs/keymaps/kyria/qwerty.svg)
+![Dvorak](docs/keymaps/kyria/dvorak.svg)
+![Gaming](docs/keymaps/kyria/gaming.svg)
+![Gaming QWERTY](docs/keymaps/kyria/gaming-qwerty.svg)
+![Gaming SC2](docs/keymaps/kyria/gaming-sc2.svg)
+![Gaming FPS](docs/keymaps/kyria/gaming-fps.svg)
+![Gaming NavNum](docs/keymaps/kyria/gaming-navnum.svg)
+
+</details>
+
+More details: [keymap readme](keyboards/splitkb/kyria/rev3/keymaps/first/readme.md).
 
 - **Colemak-DH** base layer, with QWERTY and Dvorak alternatives.
 - **Home row mods** tuned with Chordal Hold, Permissive Hold and Speculative
@@ -32,6 +56,8 @@ Full layer diagrams and details: [keymap readme](keyboards/splitkb/kyria/rev3/ke
   sync to the trackball over Raw HID.
 
 ### Ploopy trackball (`default`)
+
+![Ploopy layers](docs/keymaps/ploopy/layers.svg)
 
 - Buttons: left click, middle click, right click, momentary (inverted) drag
   scroll, and mouse button 5.
@@ -66,6 +92,19 @@ attaches the firmware to the repository's Releases.
 qmk config user.overlay_dir="$(realpath .)"   # run from this repo
 qmk userspace-compile                         # all targets
 qmk compile -kb splitkb/kyria/rev3 -km first  # or a single one
+```
+
+## Layer figures
+
+The figures in `docs/keymaps/` are generated from `keymap.c` with
+[keymap-drawer](https://github.com/caksoylar/keymap-drawer)
+(`keymap-drawer/draw.py`, style and labels in `keymap-drawer/config.yaml`).
+The *Draw keymaps* workflow redraws and commits them whenever a `keymap.c`
+changes, so `git pull` after pushing a keymap change. To draw locally (needs
+`qmk` and `keymap-drawer` installed and `QMK_HOME` set):
+
+```sh
+python3 keymap-drawer/draw.py
 ```
 
 ## Flashing

@@ -1,0 +1,248 @@
+<svg width="930" height="490" viewBox="0 0 930 490" class="keymap" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>/* inherit to force styles through use tags */
+svg path {
+    fill: inherit;
+}
+
+/* font and background color specifications */
+svg.keymap {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 14px;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    fill: #24292e;
+}
+
+/* default key styling */
+rect.key {
+    fill: #f6f8fa;
+}
+
+rect.key, rect.combo {
+    stroke: #c9cccf;
+    stroke-width: 1;
+}
+
+/* default key side styling, only used is draw_key_sides is set */
+rect.side {
+    filter: brightness(90%);
+}
+
+/* color accent for combo boxes */
+rect.combo, rect.combo-separate {
+    fill: #cdf;
+}
+
+/* color accent for held keys */
+rect.held, rect.combo.held {
+    fill: #fdd;
+}
+
+/* color accent for ghost (optional) keys */
+rect.ghost, rect.combo.ghost {
+    stroke-dasharray: 4, 4;
+    stroke-width: 2;
+}
+
+text {
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+/* styling for layer labels */
+text.label {
+    font-weight: bold;
+    text-anchor: start;
+    stroke: white;
+    stroke-width: 4;
+    paint-order: stroke;
+}
+
+/* styling for optional footer */
+text.footer {
+    text-anchor: end;
+    dominant-baseline: auto;
+    stroke: white;
+    stroke-width: 4;
+    paint-order: stroke;
+}
+
+/* styling for combo tap, and key non-tap label text */
+text.combo, text.hold, text.shifted, text.left, text.right, text.tl, text.tr, text.bl, text.br {
+    font-size: 11px;
+}
+
+text.hold, text.bl, text.br {
+    text-anchor: middle;
+    dominant-baseline: auto;
+}
+
+text.shifted, text.tl, text.tr {
+    text-anchor: middle;
+    dominant-baseline: hanging;
+}
+
+text.left, text.tl, text.bl {
+    text-anchor: start;
+}
+
+text.right, text.tr, text.br {
+    text-anchor: end;
+}
+
+text.layer-activator {
+    text-decoration: underline;
+}
+
+/* styling for hold/shifted label text in combo box */
+text.combo.hold, text.combo.shifted, text.combo.left, text.combo.right {
+    font-size: 8px;
+}
+
+/* lighter symbol for transparent keys */
+text.trans {
+    fill: #7b7e81;
+}
+
+/* styling for combo dendrons */
+path.combo {
+    stroke-width: 1;
+    stroke: gray;
+    fill: none;
+}
+
+/* Start Tabler Icons Cleanup */
+/* cannot use height/width with glyphs */
+.icon-tabler > path {
+    fill: inherit;
+    stroke: inherit;
+    stroke-width: 2;
+}
+/* hide tabler's default box */
+.icon-tabler > path[stroke="none"][fill="none"] {
+    visibility: hidden;
+}
+/* End Tabler Icons Cleanup */
+
+svg.keymap {
+  font-family: "JetBrains Mono", "Fira Code", "DejaVu Sans Mono", ui-monospace, monospace;
+  font-size: 17px; font-weight: 700;
+}
+svg.keymap { background-color: #1e1e2e; }
+rect.key { fill: #2a2b3d; stroke: #b4befe; stroke-width: 2.5; }
+rect.key.trans, rect.key.ghost { stroke: #45475a; stroke-dasharray: none; stroke-width: 2; }
+rect.key.held { fill: #45475a; stroke: #f38ba8; }
+rect.key.nav { stroke: #89dceb; }
+rect.key.sym { stroke: #f9e2af; }
+rect.key.num { stroke: #a6e3a1; }
+rect.key.uml, rect.key.fn, rect.key.adj { stroke: #cba6f7; }
+text { fill: #cdd6f4; }
+text.trans { fill: #585b70; }
+text.tl { font-size: 26px; fill: #cdd6f4; }
+text.tr { font-size: 15px; fill: #89dceb; }
+text.bl { font-size: 18px; fill: #f9e2af; }
+text.br { font-size: 18px; fill: #a6e3a1; }
+text.shifted { font-size: 12px; fill: #cba6f7; }
+text.hold { font-size: 13px; fill: #cba6f7; }
+text.nav.hold { fill: #89dceb; }
+text.sym.hold { fill: #f9e2af; }
+text.num.hold { fill: #a6e3a1; }
+use.tr { fill: #89dceb; color: #89dceb; }
+use.tap { fill: #cdd6f4; }
+text.fn.tap, text.adj.tap { font-size: 13px; }
+text.label { fill: #7f849c; stroke-width: 0; font-size: 22px; }
+text.footer { fill: #585b70; stroke-width: 0; font-size: 18px; }
+</style>
+<g transform="translate(40, 0)" class="layer-Default">
+<text x="0" y="35" class="label" id="Default">Default</text>
+<g transform="translate(0, 70)">
+<g transform="translate(35, 70)" class="key keypos-0">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key"/>
+<text x="0" y="0" class="key tap">lmb</text>
+</g>
+<g transform="translate(105, 70)" class="key keypos-1">
+<rect rx="12" ry="12" x="-28" y="-46" width="56" height="91" class="key"/>
+<text x="0" y="0" class="key tap">mmb</text>
+</g>
+<g transform="translate(175, 70)" class="key keypos-2">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key"/>
+<text x="0" y="0" class="key tap">rmb</text>
+</g>
+<g transform="translate(280, 70)" class="key keypos-3">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key"/>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.6em">drag</tspan><tspan x="0" dy="1.2em">scroll</tspan>
+</text>
+</g>
+<g transform="translate(350, 70)" class="key keypos-4">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key"/>
+<text x="0" y="0" class="key tap">fwd</text>
+</g>
+</g>
+</g>
+<g transform="translate(505, 0)" class="layer-Adjust">
+<text x="0" y="35" class="label" id="Adjust">Adjust</text>
+<g transform="translate(0, 70)">
+<g transform="translate(35, 70)" class="key trans keypos-0">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key trans"/>
+</g>
+<g transform="translate(105, 70)" class="key trans keypos-1">
+<rect rx="12" ry="12" x="-28" y="-46" width="56" height="91" class="key trans"/>
+</g>
+<g transform="translate(175, 70)" class="key trans keypos-2">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key trans"/>
+</g>
+<g transform="translate(280, 70)" class="key trans keypos-3">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key trans"/>
+</g>
+<g transform="translate(350, 70)" class="key keypos-4">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key"/>
+<text x="0" y="0" class="key tap">boot</text>
+</g>
+</g>
+</g>
+<g transform="translate(40, 210)" class="layer-Gaming">
+<text x="0" y="35" class="label" id="Gaming">Gaming</text>
+<g transform="translate(0, 70)">
+<g transform="translate(35, 70)" class="key keypos-0">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key"/>
+<text x="0" y="0" class="key tap">spc</text>
+</g>
+<g transform="translate(105, 70)" class="key trans keypos-1">
+<rect rx="12" ry="12" x="-28" y="-46" width="56" height="91" class="key trans"/>
+</g>
+<g transform="translate(175, 70)" class="key trans keypos-2">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key trans"/>
+</g>
+<g transform="translate(280, 70)" class="key keypos-3">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key"/>
+<text x="0" y="0" class="key tap">back</text>
+</g>
+<g transform="translate(350, 70)" class="key trans keypos-4">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key trans"/>
+</g>
+</g>
+</g>
+<g transform="translate(505, 210)" class="layer-Gaming SC2">
+<text x="0" y="35" class="label" id="Gaming-SC2">Gaming SC2</text>
+<g transform="translate(0, 70)">
+<g transform="translate(35, 70)" class="key trans keypos-0">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key trans"/>
+</g>
+<g transform="translate(105, 70)" class="key trans keypos-1">
+<rect rx="12" ry="12" x="-28" y="-46" width="56" height="91" class="key trans"/>
+</g>
+<g transform="translate(175, 70)" class="key trans keypos-2">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key trans"/>
+</g>
+<g transform="translate(280, 70)" class="key keypos-3">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key"/>
+<text x="0" y="0" class="key tap">fwd</text>
+</g>
+<g transform="translate(350, 70)" class="key keypos-4">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key"/>
+<text x="0" y="0" class="key tap">back</text>
+</g>
+</g>
+</g>
+<text x="890.0" y="455.0" class="footer">ploopy classic 2</text></svg>
