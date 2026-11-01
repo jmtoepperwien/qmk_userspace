@@ -158,7 +158,7 @@ text.footer { fill: #585b70; stroke-width: 0; font-size: 18px; }
 <g transform="translate(0, 70)">
 <g transform="translate(35, 88)" class="key keypos-0">
 <rect rx="12" ry="12" x="-28" y="-28" width="56" height="56" class="key"/>
-<text x="0" y="0" class="key tap">tab</text>
+<text x="0" y="0" class="key tap">Alt</text>
 </g>
 <g transform="translate(105, 88)" class="key keypos-1">
 <rect rx="12" ry="12" x="-28" y="-28" width="56" height="56" class="key"/>
@@ -321,11 +321,11 @@ text.footer { fill: #585b70; stroke-width: 0; font-size: 18px; }
 </g>
 <g transform="translate(210, 262)" class="key keypos-40">
 <rect rx="12" ry="12" x="-28" y="-28" width="56" height="56" class="key"/>
-<text x="0" y="0" class="key tap">tab</text>
+<text x="0" y="0" class="key tap">3</text>
 </g>
 <g transform="translate(280, 262)" class="key keypos-41">
 <rect rx="12" ry="12" x="-28" y="-28" width="56" height="56" class="key"/>
-<text x="0" y="0" class="key tap">Alt</text>
+<text x="0" y="0" class="key tap">tab</text>
 </g>
 <g transform="translate(350, 280)" class="key keypos-42">
 <rect rx="12" ry="12" x="-28" y="-28" width="56" height="56" class="key"/>

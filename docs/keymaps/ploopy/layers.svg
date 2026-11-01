@@ -204,9 +204,8 @@ text.footer { fill: #585b70; stroke-width: 0; font-size: 18px; }
 <g transform="translate(40, 210)" class="layer-Gaming">
 <text x="0" y="35" class="label" id="Gaming">Gaming</text>
 <g transform="translate(0, 70)">
-<g transform="translate(35, 70)" class="key keypos-0">
-<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key"/>
-<text x="0" y="0" class="key tap">spc</text>
+<g transform="translate(35, 70)" class="key trans keypos-0">
+<rect rx="12" ry="12" x="-28" y="-63" width="56" height="126" class="key trans"/>
 </g>
 <g transform="translate(105, 70)" class="key trans keypos-1">
 <rect rx="12" ry="12" x="-28" y="-46" width="56" height="91" class="key trans"/>
