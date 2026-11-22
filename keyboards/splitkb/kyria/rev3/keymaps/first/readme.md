@@ -131,7 +131,7 @@ taps. Base home-row mods stay held across the layer switch, so hold
 
 Digits on the right double as modifiers when held — e.g. hold `4` for Shift.
 
-## Function layer (hold F-keys on the inner index columns, or Sym+Nav)
+## Function layer (hold F-keys on the inner index columns)
 
 ```
  ,-------------------------------------------.                              ,-------------------------------------------.
@@ -206,8 +206,6 @@ gaming, extra buttons on SCII).
   two keys holding it is released; `post_process_record_user` counts active
   layer keys and re-asserts the layer until the last one is released (e.g.
   Sym held on both thumbs stays on until both lift).
-- **Tri-layer**: holding Sym and Nav together activates Adjust — no finger
-  gymnastics needed for RGB / layout switching.
 - Caps Word with a 5 s idle timeout; umlaut keys and the compose keys they
   send are whitelisted so Caps Word survives umlauts.
 - **Shift+Backspace → Delete** (tap of the Sym/Bksp thumb only, so
