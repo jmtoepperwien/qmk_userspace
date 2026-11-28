@@ -199,7 +199,8 @@ gaming, extra buttons on SCII).
 ## Firmware details
 
 - Tap-hold: `TAPPING_TERM 175` (+15 ms on the pinky/ring home-row mods —
-  they roll slower), `QUICK_TAP_TERM 100`, `PERMISSIVE_HOLD`,
+  they roll slower), `QUICK_TAP_TERM 0` (no tap-repeat lockout, so a thumb
+  layer key always holds when held), `PERMISSIVE_HOLD`,
   `SPECULATIVE_HOLD`, `CHORDAL_HOLD` (+ the one-handed copy/paste exception;
   gaming layers exempt entirely).
 - **Dual layer-key refcount**: QMK kills a momentary layer when *either* of

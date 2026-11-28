@@ -37,7 +37,10 @@
 
 #define TAPPING_TERM 175
 #define TAPPING_TERM_PER_KEY
-#define QUICK_TAP_TERM 100
+// 0 disables the tap-repeat lockout: tapping a tap-hold key and pressing it
+// again no longer forces the second press to tap, so a thumb layer key always
+// registers as a hold when it is held.
+#define QUICK_TAP_TERM 0
 #define CHORDAL_HOLD
 #define PERMISSIVE_HOLD
 #define SPECULATIVE_HOLD
